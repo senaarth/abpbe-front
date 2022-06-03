@@ -5,6 +5,7 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
   }
 
   html, body, #__next {
@@ -13,5 +14,10 @@ export default createGlobalStyle`
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: ${({ theme }) => theme.background};
+  }
+
+  .playfair {
+    font-family: 'Playfair Display', serif;
   }
 `;
