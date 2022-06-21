@@ -22,6 +22,7 @@ export const theme = {
   gray400: "#AAA4A4",
   gray500: "#D7D7D7",
   gray600: "#FFFFFF",
+  blueWarm: "#C5D4EB",
   gradientHorizontal: "linear-gradient(to left, #263B58, #9DC8CF)",
   gradientVertical: "linear-gradient(to bottom, #263B58, #9DC8CF)",
 };

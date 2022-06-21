@@ -27,5 +27,6 @@ declare module "styled-components" {
     gray600: string;
     gradientHorizontal: string;
     gradientVertical: string;
+    blueWarm: string;
   }
 }
