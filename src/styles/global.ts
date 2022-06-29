@@ -20,4 +20,12 @@ export default createGlobalStyle`
   .playfair {
     font-family: 'Playfair Display', serif;
   }
+
+  a {
+    transition: filter 0.3s;
+    
+    &:hover {
+      filter: brightness(0.8);
+    }
+  }
 `;
