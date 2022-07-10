@@ -1,10 +1,11 @@
 export const theme = {
   background: "#F8F8F8",
   default: "#467495",
+  defaultSecondary: "#103859",
   dark: "#263B58",
   light: "#9DC8CF",
   aux1: "#FAFAFA",
-  aux2: "#284E85",
+  aux2: "#3765A6",
   aux3: "#567C82",
   aux4: "#1A3547",
   aux5: "#5878A6",
