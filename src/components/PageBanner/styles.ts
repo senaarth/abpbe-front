@@ -16,7 +16,6 @@ export const Container = styled.div`
     text-align: center;
     color: ${({ theme }) => theme.gray600};
     font-weight: 600;
-    margin-top: auto;
 
     display: flex;
     position: relative;
@@ -26,6 +25,7 @@ export const Container = styled.div`
 
     @media (min-width: 768px) {
       font-size: 3.25rem;
+      margin-top: auto;
     }
 
     /* &.highlight::after {
@@ -47,10 +47,11 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.gray600};
     font-weight: 500;
 
-    margin-top: 2rem;
+    margin: 1.75rem 0;
 
     @media (min-width: 768px) {
       font-size: 1.5rem;
+      margin-top: 2rem;
     }
   }
 `;
@@ -83,14 +84,15 @@ export const ScrollDown = styled.div`
     font-size: 0.75rem;
     font-weight: 600;
   }
+
+  /* @media (min-width: 768px) {
+    display: flex;
+  } */
 `;
 
 export const SocialMedia = styled.div`
   width: 100%;
   max-width: 240px;
-
-  margin-top: auto;
-  margin-left: auto;
 
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -111,5 +113,10 @@ export const SocialMedia = styled.div`
       width: 50%;
       object-fit: contain;
     }
+  }
+
+  @media (min-width: 768px) {
+    margin-top: auto;
+    margin-left: auto;
   }
 `;
