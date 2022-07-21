@@ -6,7 +6,7 @@ interface ButtonProps {
   type: "button" | "submit" | "reset" | undefined;
   text: string;
   className: string;
-  onClick: () => void;
+  onClick?: () => void;
   disabled?: boolean;
   isLoading?: boolean;
   customStyles?: {};
@@ -16,7 +16,7 @@ export function Button({
   type,
   text,
   className,
-  onClick,
+  onClick = () => {},
   disabled = false,
   isLoading = false,
   customStyles = {},
