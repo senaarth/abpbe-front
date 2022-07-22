@@ -5,7 +5,8 @@ import { ButtonContainer } from "./styles";
 interface ButtonProps {
   type: "button" | "submit" | "reset" | undefined;
   text: string;
-  className: string;
+  className?: string;
+  variant?: "primary" | "secondary" | "outlined" | undefined;
   onClick?: () => void;
   disabled?: boolean;
   isLoading?: boolean;
@@ -15,7 +16,8 @@ interface ButtonProps {
 export function Button({
   type,
   text,
-  className,
+  className = "",
+  variant = "primary",
   onClick = () => {},
   disabled = false,
   isLoading = false,
@@ -24,7 +26,7 @@ export function Button({
   return (
     <ButtonContainer
       type={type || "button"}
-      className={className}
+      className={`btn btn-${variant} ${className}`}
       onClick={() => onClick()}
       disabled={disabled}
       style={customStyles}

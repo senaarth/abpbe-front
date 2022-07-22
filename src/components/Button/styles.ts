@@ -25,23 +25,29 @@ export const ButtonContainer = styled.button`
     filter: brightness(0.8);
   }
 
-  &.primary {
+  &.btn-primary {
     border: 1px solid ${({ theme }) => theme.default};
     background-color: ${({ theme }) => theme.default};
   }
 
-  &.secondary {
+  &.btn-secondary {
     border: 1px solid ${({ theme }) => theme.defaultSecondary};
     background-color: ${({ theme }) => theme.defaultSecondary};
   }
 
-  &.outlined {
+  &.btn-outlined {
     border: 1px solid ${({ theme }) => theme.aux2};
     background-color: transparent;
     color: #3765a6;
   }
 
-  &.rounded {
+  &.btn-rounded {
     border-radius: 12px;
+  }
+
+  &:disabled {
+    filter: brightness(1);
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 `;
