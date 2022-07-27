@@ -12,7 +12,7 @@ interface PageBannerProps {
 }
 
 export function PageBanner({
-  img,
+  img = "/images/bg_library.png",
   title,
   subtitle,
   whiteSubtitle = false,
