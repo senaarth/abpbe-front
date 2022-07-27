@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CardContainer = styled.button`
+export const CardContainer = styled.a`
   display: flex;
   flex-direction: column;
   align-items: center;

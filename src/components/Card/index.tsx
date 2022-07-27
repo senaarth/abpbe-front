@@ -1,5 +1,4 @@
 import React from "react";
-import { useRouter } from "next/router";
 
 import { CardContainer } from "./styles";
 
@@ -17,24 +16,11 @@ export function Card({
   title,
   subtitle,
   linkCall,
-  link,
+  link = "/",
   targetBlank = true,
 }: CardProps) {
-  const router = useRouter();
-
   return (
-    <CardContainer
-      onClick={() => {
-        if (!link) return;
-
-        if (targetBlank) {
-          window.open(link);
-          return;
-        }
-
-        router.push(link);
-      }}
-    >
+    <CardContainer href={link} target={targetBlank ? "_blank" : "_self"}>
       <img src={banner} alt={`Banner ${title || subtitle}`} />
       <div className="text-container">
         {!!title && <h1 className="title">{title}</h1>}
