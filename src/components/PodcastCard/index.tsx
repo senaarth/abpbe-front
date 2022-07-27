@@ -13,7 +13,11 @@ interface PodcastProps {
 
 export function PodcastCard({ link, banner, title, author }: PodcastProps) {
   return (
-    <PodcastContainer href={link} target="_blank">
+    <PodcastContainer
+      onClick={() => {
+        if (link) window.open(link);
+      }}
+    >
       <BannerContainer>
         <img className="banner" src={banner} alt={`Banner podcast ${title}`} />
         <img src={imgPlay.src} alt="ícone play" className="play" />

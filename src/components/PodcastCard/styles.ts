@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const PodcastContainer = styled.a`
+export const PodcastContainer = styled.button`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -9,6 +9,11 @@ export const PodcastContainer = styled.a`
   width: 100%;
   max-width: 314px;
   text-decoration: none;
+
+  cursor: pointer;
+  border: 0;
+  outline: none;
+  background: transparent;
 `;
 
 export const BannerContainer = styled.div`
@@ -17,6 +22,7 @@ export const BannerContainer = styled.div`
   justify-content: center;
 
   border-radius: 10px;
+  overflow: hidden;
   position: relative;
   background: ${({ theme }) => theme.dark};
 
