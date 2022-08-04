@@ -20,7 +20,13 @@ export function PageBanner({
   tag,
 }: PageBannerProps) {
   return (
-    <Container style={{ backgroundImage: `url(${img})` }}>
+    <Container
+      style={{
+        backgroundImage: `url(${
+          img !== "" && !!img ? img : "/images/bg_library.png"
+        })`,
+      }}
+    >
       {!!tag && <p className="tag">{tag}</p>}
       <h1 className={`playfair ${isTitleHighlighted ? "highlight" : ""}`}>
         {title}
