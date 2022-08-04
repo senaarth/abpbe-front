@@ -3,6 +3,11 @@ import React from "react";
 import { Container, Content, Bottom, Head, SocialMedia, Nav } from "./styles";
 
 export function Footer() {
+  const [conteudo, setConteudo] = React.useState(false);
+  const [novidades, setNovidades] = React.useState(false);
+  const [sobre, setSobre] = React.useState(false);
+  const [facaParte, setFacaParte] = React.useState(false);
+
   return (
     <Container>
       <Content>
@@ -32,7 +37,11 @@ export function Footer() {
         </Head>
         <Nav>
           <h5>Conteúdo sobre PBE</h5>
-          <ul>
+          <button type="button" onClick={() => setConteudo(!conteudo)}>
+            Conteúdo sobre PBE
+            <img src="/images/chevron_down.png" alt="Seta para baixo" />
+          </button>
+          <ul className={conteudo ? "active" : ""}>
             <a href="/" target="_blank" rel="noreferrer">
               Galeria de artigos acadêmicos
             </a>
@@ -52,7 +61,11 @@ export function Footer() {
         </Nav>
         <Nav>
           <h5>Novidades</h5>
-          <ul>
+          <button type="button" onClick={() => setNovidades(!novidades)}>
+            Novidades
+            <img src="/images/chevron_down.png" alt="Seta para baixo" />
+          </button>
+          <ul className={novidades ? "active" : ""}>
             <a href="/" target="_blank" rel="noreferrer">
               Eventos, Congressos e Lives
             </a>
@@ -66,7 +79,11 @@ export function Footer() {
         </Nav>
         <Nav>
           <h5>Sobre a associação</h5>
-          <ul>
+          <button type="button" onClick={() => setSobre(!sobre)}>
+            Sobre a associação
+            <img src="/images/chevron_down.png" alt="Seta para baixo" />
+          </button>
+          <ul className={sobre ? "active" : ""}>
             <a href="/" target="_blank" rel="noreferrer">
               Quem somos
             </a>
@@ -86,7 +103,11 @@ export function Footer() {
         </Nav>
         <Nav>
           <h5>Faça parte</h5>
-          <ul>
+          <button type="button" onClick={() => setFacaParte(!facaParte)}>
+            Faça parte
+            <img src="/images/chevron_down.png" alt="Seta para baixo" />
+          </button>
+          <ul className={facaParte ? "active" : ""}>
             <a href="/" target="_blank" rel="noreferrer">
               Quero me associar
             </a>
