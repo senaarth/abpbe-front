@@ -10,6 +10,8 @@ export const Container = styled.footer`
   justify-content: center;
 
   background-image: url(/images/bg_library.png);
+
+  border-radius: 8px 8px 0 0;
 `;
 
 export const Content = styled.div`
