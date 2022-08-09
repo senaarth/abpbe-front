@@ -4,7 +4,7 @@ import Image from "next/image";
 import { CardContainer } from "./styles";
 
 interface CardProps {
-  banner?: string;
+  image?: string;
   title?: string;
   subtitle?: string;
   linkCall?: string;
@@ -13,7 +13,7 @@ interface CardProps {
 }
 
 export function Card({
-  banner = "/images/card_placeholder.png",
+  image = "/images/card_placeholder.png",
   title,
   subtitle,
   linkCall,
@@ -31,8 +31,8 @@ export function Card({
           placeholder="blur"
           blurDataURL="/images/card_placeholder.png"
           src={
-            !!banner && banner !== "" && !imageError
-              ? banner
+            !!image && image !== "" && !imageError
+              ? image
               : "/images/card_placeholder.png"
           }
           onError={() => setImageError(true)}

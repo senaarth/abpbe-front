@@ -18,10 +18,10 @@ import {
 } from "../styles/Home";
 
 type News = {
-  id: number;
+  id: string;
   title: string;
   slug: string;
-  banner: string;
+  image: string;
 };
 
 interface HomeProps {
@@ -114,21 +114,21 @@ export default function Home({ news }: HomeProps): JSX.Element {
 export async function getServerSideProps() {
   const news = [
     {
-      id: 1,
-      banner: "",
+      id: "1",
+      image: "",
       title: "ABPBE participou da Recepção de Calouros da UFMG",
       slug: "recepcao-calouros-ufmg",
     },
     {
-      id: 2,
-      banner: "",
+      id: "2",
+      image: "",
       title:
         "Colaborador da ABPBE esteve na audiência pública do Senado Federal se posicionando contra a Constelação Familiar",
       slug: "colaborador-audiencia-publica-senado",
     },
     {
-      id: 3,
-      banner: "/images/bg_librar.png",
+      id: "3",
+      image: "/images/bg_librar.png",
       title: "ABPBE participou de uma entrevista no portal Comporte-se",
       slug: "abpbe-entrevista-portal-comporte-se",
     },
