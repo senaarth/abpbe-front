@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { PageBanner } from "../components/PageBanner";
 import { Button } from "../components/Button";
 import { Card } from "../components/Card";
+import { Footer } from "../components/Footer";
 
 import {
   Page,
@@ -105,6 +106,7 @@ export default function Home({ news }: HomeProps): JSX.Element {
           alt="ruído para plano de fundo"
         />
       </PartnerCall>
+      <Footer />
     </Page>
   );
 }
