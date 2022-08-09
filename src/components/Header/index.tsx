@@ -119,7 +119,7 @@ export function Header() {
                 onClick={() => setNovidades(!novidades)}
                 className={novidades ? "open" : ""}
               >
-                Novidaes
+                Novidades
                 <img
                   src="/images/chevron_down_blue.png"
                   alt="Seta para baixo"

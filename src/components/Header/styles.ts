@@ -120,6 +120,18 @@ export const MobileMenu = styled.div`
         object-fit: contain;
         transition: all 0.4s;
       }
+
+      &.open {
+        width: 100%;
+        justify-content: center;
+
+        font-size: 1.25rem;
+        color: #88c9d0;
+
+        img {
+          transform: rotate(180deg);
+        }
+      }
     }
 
     > button:last-child {

@@ -27,6 +27,7 @@ export const CardContainer = styled.a`
       img {
         max-height: 194px !important;
         border-radius: 10px 10px 0 0;
+        margin: 0 !important;
       }
     }
   }
