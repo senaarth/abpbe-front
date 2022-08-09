@@ -13,6 +13,9 @@ export const Container = styled.div`
   padding: 2.5rem;
 
   z-index: 0;
+  position: relative;
+
+  background-size: cover;
 
   h1 {
     font-size: 1.5rem;
@@ -23,12 +26,10 @@ export const Container = styled.div`
     display: flex;
     position: relative;
 
-    width: 90%;
     max-width: 960px;
 
     @media (min-width: 768px) {
       font-size: 3.25rem;
-      margin-top: auto;
     }
 
     /* &.highlight::after {

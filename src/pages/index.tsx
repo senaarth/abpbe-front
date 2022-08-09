@@ -5,12 +5,12 @@ import { useRouter } from "next/router";
 import { PageBanner } from "../components/PageBanner";
 import { Button } from "../components/Button";
 import { Card } from "../components/Card";
+import { PageCall } from "../components/PageCall";
 import { Footer } from "../components/Footer";
 
 import {
   Page,
   ContentContainer,
-  PartnerCall,
   ButtonsContainer,
   About,
   NewsContainer,
@@ -40,6 +40,7 @@ export default function Home({ news }: HomeProps): JSX.Element {
         img=""
         title="Associação Brasileira de Psicologia Baseada em Evidências"
         subtitle="Ciência e Responsabilidade Social"
+        socialMedia
       />
       <ContentContainer>
         <About>
@@ -97,15 +98,10 @@ export default function Home({ news }: HomeProps): JSX.Element {
           />
         </NewsContainer>
       </ContentContainer>
-      <PartnerCall>
-        <h3 className="playfair">
-          Nos ajude a aproximar a Psicologia do fazer científico.
-        </h3>
-        <img
-          src="/images/noise_rectangle.png"
-          alt="ruído para plano de fundo"
-        />
-      </PartnerCall>
+      <PageCall
+        playfairFont
+        title="Nos ajude a aproximar a Psicologia do fazer científico."
+      />
       <Footer />
     </Page>
   );
