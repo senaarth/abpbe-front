@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100%;
   height: 100vh;
+  max-height: 45rem;
 
   display: flex;
   flex-direction: column;
@@ -10,6 +11,8 @@ export const Container = styled.div`
   justify-content: center;
 
   padding: 2.5rem;
+
+  z-index: 0;
 
   h1 {
     font-size: 1.5rem;
