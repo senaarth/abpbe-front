@@ -17,7 +17,7 @@ export function PageCall({
   playfairFont = false,
   subtitle,
   btnTxt,
-  onClick,
+  onClick = () => {},
 }: PageCallProps) {
   return (
     <Container>
