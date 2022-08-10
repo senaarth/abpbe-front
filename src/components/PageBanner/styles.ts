@@ -13,6 +13,29 @@ export const Container = styled.div`
   padding: 2.5rem;
 
   z-index: 0;
+  position: relative;
+
+  background-size: cover;
+
+  p.tag {
+    padding: 0.125rem 0.625rem;
+
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.375rem;
+    color: ${({ theme }) => theme.aux3};
+    background: ${({ theme }) => theme.light};
+
+    margin-bottom: 0.875rem;
+
+    @media (min-width: 768px) {
+      margin-bottom: 1.25rem;
+
+      &.mt-auto {
+        margin-top: auto;
+      }
+    }
+  }
 
   h1 {
     font-size: 1.5rem;
@@ -23,12 +46,10 @@ export const Container = styled.div`
     display: flex;
     position: relative;
 
-    width: 90%;
     max-width: 960px;
 
     @media (min-width: 768px) {
       font-size: 3.25rem;
-      margin-top: auto;
     }
 
     /* &.highlight::after {

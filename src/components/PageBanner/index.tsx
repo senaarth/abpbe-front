@@ -8,6 +8,7 @@ interface PageBannerProps {
   subtitle: string;
   whiteSubtitle?: boolean;
   isTitleHighlighted?: boolean;
+  socialMedia?: boolean;
   tag?: string;
 }
 
@@ -17,40 +18,45 @@ export function PageBanner({
   subtitle,
   whiteSubtitle = false,
   isTitleHighlighted = false,
+  socialMedia = false,
   tag,
 }: PageBannerProps) {
   return (
     <Container
       style={{
-        backgroundImage: `url(${
+        background: `url(${
           img !== "" && !!img ? img : "/images/bg_library.png"
-        })`,
+        }) center center no-repeat`,
       }}
     >
-      {!!tag && <p className="tag">{tag}</p>}
+      {!!tag && tag !== "" && (
+        <p className={`tag  ${socialMedia ? " mt-auto" : ""}`}>{tag}</p>
+      )}
       <h1 className={`playfair ${isTitleHighlighted ? "highlight" : ""}`}>
         {title}
       </h1>
       {!!subtitle && (
         <h2 style={{ opacity: whiteSubtitle ? 1 : 0.75 }}>{subtitle}</h2>
       )}
-      <SocialMedia>
-        <a href="https://instagram.com" target="_blank" rel="noreferrer">
-          <img src="/images/instagram.png" alt="Ícone instagram" />
-        </a>
-        <a href="https://facebook.com" target="_blank" rel="noreferrer">
-          <img src="/images/facebook.png" alt="Ícone facebook" />
-        </a>
-        <a href="https://twitter.com" target="_blank" rel="noreferrer">
-          <img src="/images/twitter.png" alt="Ícone twitter" />
-        </a>
-        <a href="https://linkedin.com" target="_blank" rel="noreferrer">
-          <img src="/images/linkedin.png" alt="Ícone linkedin" />
-        </a>
-        <a href="https://youtube.com" target="_blank" rel="noreferrer">
-          <img src="/images/youtube.png" alt="Ícone youtube" />
-        </a>
-      </SocialMedia>
+      {socialMedia && (
+        <SocialMedia>
+          <a href="https://instagram.com" target="_blank" rel="noreferrer">
+            <img src="/images/instagram.png" alt="Ícone instagram" />
+          </a>
+          <a href="https://facebook.com" target="_blank" rel="noreferrer">
+            <img src="/images/facebook.png" alt="Ícone facebook" />
+          </a>
+          <a href="https://twitter.com" target="_blank" rel="noreferrer">
+            <img src="/images/twitter.png" alt="Ícone twitter" />
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noreferrer">
+            <img src="/images/linkedin.png" alt="Ícone linkedin" />
+          </a>
+          <a href="https://youtube.com" target="_blank" rel="noreferrer">
+            <img src="/images/youtube.png" alt="Ícone youtube" />
+          </a>
+        </SocialMedia>
+      )}
       <ScrollDown>
         <img src="/images/arrow_down.png" alt="Seta apontando para baixo" />
       </ScrollDown>
