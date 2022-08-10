@@ -20,17 +20,18 @@ export function PageBanner({
   isTitleHighlighted = false,
   socialMedia = false,
 }: // tag,
-PageBannerProps) {
+  PageBannerProps) {
   return (
     <Container
       style={{
-        background: `url(${
-          img !== "" && !!img ? img : "/images/bg_library.png"
-        }) center center no-repeat`,
+        background: `url(${img !== "" && !!img ? img : "/images/bg_library.png"
+          }) center center no-repeat`,
       }}
     >
       {/* {!!tag && <p className="tag">{tag}</p>} */}
-      <h1 className={`playfair ${isTitleHighlighted ? "highlight" : ""}`}>
+      <h1
+        className={`playfair ${socialMedia ? "mt-auto" : ""} ${isTitleHighlighted ? "highlight" : ""}`}
+      >
         {title}
       </h1>
       {!!subtitle && (

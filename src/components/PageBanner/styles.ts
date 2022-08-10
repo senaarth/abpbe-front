@@ -30,6 +30,10 @@ export const Container = styled.div`
 
     @media (min-width: 768px) {
       font-size: 3.25rem;
+
+      &.mt-auto {
+        margin-top: auto;
+      }
     }
 
     /* &.highlight::after {
