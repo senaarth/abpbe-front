@@ -22,7 +22,7 @@ export default function Parceiros(): JSX.Element {
         subtitle="Aqui você encontrará textos sobre os mais diversos temas relevantes para a Psicologia Baseada em Evidências, desde discussões clássicas até as últimas novidades da ciência."
         whiteSubtitle
         isTitleHighlighted
-        // tag="Novidades"
+        tag="Novidades"
       />
       <ContentContainer>
         <h1 className="playfair title translate-highlight">

@@ -9,7 +9,7 @@ interface PageBannerProps {
   whiteSubtitle?: boolean;
   isTitleHighlighted?: boolean;
   socialMedia?: boolean;
-  // tag?: string;
+  tag?: string;
 }
 
 export function PageBanner({
@@ -19,19 +19,20 @@ export function PageBanner({
   whiteSubtitle = false,
   isTitleHighlighted = false,
   socialMedia = false,
-}: // tag,
-  PageBannerProps) {
+  tag,
+}: PageBannerProps) {
   return (
     <Container
       style={{
-        background: `url(${img !== "" && !!img ? img : "/images/bg_library.png"
-          }) center center no-repeat`,
+        background: `url(${
+          img !== "" && !!img ? img : "/images/bg_library.png"
+        }) center center no-repeat`,
       }}
     >
-      {/* {!!tag && <p className="tag">{tag}</p>} */}
-      <h1
-        className={`playfair ${socialMedia ? "mt-auto" : ""} ${isTitleHighlighted ? "highlight" : ""}`}
-      >
+      {!!tag && tag !== "" && (
+        <p className={`tag  ${socialMedia ? " mt-auto" : ""}`}>{tag}</p>
+      )}
+      <h1 className={`playfair ${isTitleHighlighted ? "highlight" : ""}`}>
         {title}
       </h1>
       {!!subtitle && (
