@@ -15,8 +15,6 @@ export const Container = styled.div`
   z-index: 0;
   position: relative;
 
-  background-size: cover;
-
   p.tag {
     padding: 0.125rem 0.625rem;
 

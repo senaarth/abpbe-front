@@ -48,7 +48,7 @@ export default function Mitos({ mitos }: MitosProps): JSX.Element {
               <MithCard key={item.id}>
                 <h2 className="playfair">{item.title}</h2>
                 {item.isFact ? (
-                  <b className="is-fact">
+                  <b className="is-fact source-sans">
                     <img
                       src="/images/fact.png"
                       alt="ícone de fato verdadeiro"
@@ -56,7 +56,7 @@ export default function Mitos({ mitos }: MitosProps): JSX.Element {
                     VERDADE!
                   </b>
                 ) : (
-                  <b>
+                  <b className="source-sans">
                     <img
                       src="/images/mith.png"
                       alt="ícone de x indicando falsidade na afirmação"
@@ -79,13 +79,14 @@ export async function getServerSideProps() {
   const mitos = [
     {
       id: "1",
-      title: "senaarth",
+      title:
+        "Colleges and Universities are not familiar with Proficiency-Based Education transcripts",
       description: `College and University admissions departments see a large variety of transcripts on a regular basis - some from 100-point traditional systems, some from 4-point traditional systems, some from PBE/Standards-Based systems, some from foreign countries, some from home-schooled children, etc. etc..  Time and al and assessment system at a school.  The good School Profile is the "de- coder" for admissions counselors to read a transcript - as long as the two clearly articulate school expectations and systems along with student performance in accordance with those expectations and systems, a student will have a fair shot at admission to their program of choice.`,
       isFact: false,
     },
     {
       id: "2",
-      title: "o senart eh mito",
+      title: `"Highest-score" calculation settings are used to define overall proficiency levels for each performance`,
       description: `College and University admissions departments see a large variety of transcripts on a regular basis - some from 100-point traditional systems, some from 4-point traditional systems, some from PBE/Standards-Based systems, some from foreign countries, some from home-schooled children, etc. etc..  Time and al and assessment system at a school.  The good School Profile is the "de- coder" for admissions counselors to read a transcript - as long as the two clearly articulate school expectations and systems along with student performance in accordance with those expectations and systems, a student will have a fair shot at admission to their program of choice.`,
       isFact: true,
     },

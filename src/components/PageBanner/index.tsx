@@ -29,6 +29,7 @@ export function PageBanner({
         background: `url(${
           img !== "" && !!img ? img : "/images/bg_library.png"
         }) center center no-repeat`,
+        backgroundSize: "cover",
       }}
     >
       {!!tag && tag !== "" && (

@@ -20,7 +20,7 @@ export const ContentContainer = styled.main`
   width: 100%;
   background-color: ${({ theme }) => theme.background};
 
-  padding: 1.75rem 0;
+  padding: 1.75rem 0 9rem;
 
   z-index: 1;
   overflow-x: hidden;
@@ -34,7 +34,7 @@ export const ContentContainer = styled.main`
     margin-top: 2rem;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1000px) {
     margin-top: -8px;
     border-radius: 8px 8px 0 0;
     padding: 2.625rem 0;
@@ -54,7 +54,7 @@ export const MithsContainer = styled.div`
   &::before {
     content: "";
 
-    width: 80vw;
+    width: 95vw;
     height: 1px;
     background: #c4c4c4;
     opacity: 0.84;
@@ -70,10 +70,6 @@ export const MithsContainer = styled.div`
 
     padding-top: 1.75rem;
     padding-bottom: 18.5rem;
-
-    &::before {
-      width: 95vw;
-    }
 
     &::after {
       content: "";
@@ -108,7 +104,7 @@ export const MithCard = styled.div`
     color: #333a40;
     font-weight: 400;
 
-    @media (min-width: 768px) {
+    @media (min-width: 1000px) {
       font-size: 2rem;
     }
   }
@@ -116,7 +112,7 @@ export const MithCard = styled.div`
   b {
     font-size: 1.5rem;
     font-weight: 600;
-    margin: 1rem 0;
+    margin: 0.625rem 0 2.375rem;
     color: #f79e19;
 
     display: flex;
@@ -130,6 +126,11 @@ export const MithCard = styled.div`
 
     &.is-fact {
       color: ${({ theme }) => theme.success};
+      opacity: 0.75;
+    }
+
+    @media (min-width: 1000px) {
+      margin: 1rem 0;
     }
   }
 
@@ -138,7 +139,7 @@ export const MithCard = styled.div`
     line-height: 1.375rem;
     color: #313131;
 
-    @media (min-width: 768px) {
+    @media (min-width: 1000px) {
       font-size: 1.25rem;
       line-height: 1.875rem;
       color: #394655;
