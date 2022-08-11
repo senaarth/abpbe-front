@@ -52,9 +52,7 @@ export default function Noticia({
       <ContentContainer>
         <h1 className="title">Últimas notícias da ABPBE</h1>
         <h2 className="playfair">{noticia?.title}</h2>
-        <h3 className="playfair">
-          Publicado em {noticia?.publicationDate}
-        </h3>
+        <h3 className="playfair">Publicado em {noticia?.publicationDate}</h3>
         <p>{noticia?.content}</p>
         <ReviwerContainer>
           <div className="image-wrapper">
@@ -65,8 +63,8 @@ export default function Noticia({
               blurDataURL="/images/card_placeholder.png"
               src={
                 !!noticia?.reviwer?.picture &&
-                  noticia?.reviwer?.picture !== "" &&
-                  !imageError
+                noticia?.reviwer?.picture !== "" &&
+                !imageError
                   ? noticia?.reviwer?.picture
                   : "/images/card_placeholder.png"
               }

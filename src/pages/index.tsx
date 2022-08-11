@@ -41,6 +41,7 @@ export default function Home({ news }: HomeProps): JSX.Element {
         title="Associação Brasileira de Psicologia Baseada em Evidências"
         subtitle="Ciência e Responsabilidade Social"
         socialMedia
+        scrollDownCall
       />
       <ContentContainer>
         <About>

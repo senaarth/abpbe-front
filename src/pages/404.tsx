@@ -5,7 +5,7 @@ import { Button } from "../components/Button";
 
 import { Container, ContentContainer } from "../styles/404";
 
-export default function Home(): JSX.Element {
+export default function NotFound(): JSX.Element {
   return (
     <Container>
       <Head>
