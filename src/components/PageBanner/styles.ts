@@ -15,8 +15,6 @@ export const Container = styled.div`
   z-index: 0;
   position: relative;
 
-  background-size: cover;
-
   p.tag {
     padding: 0.125rem 0.625rem;
 
@@ -50,6 +48,10 @@ export const Container = styled.div`
 
     @media (min-width: 768px) {
       font-size: 3.25rem;
+
+      &.mt-auto {
+        margin-top: auto;
+      }
     }
 
     /* &.highlight::after {

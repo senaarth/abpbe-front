@@ -21,6 +21,10 @@ export default createGlobalStyle`
     font-family: "Playfair Display", serif;
   }
 
+  .source-sans {
+    font-family: "Source Sans 3", sans-serif;
+  }
+
   a {
     transition: filter 0.3s;
     
