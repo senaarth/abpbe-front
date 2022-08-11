@@ -32,6 +32,7 @@ export default function Mitos({ mitos }: MitosProps): JSX.Element {
         img="/images/bg_library_1.png"
         title="Mitos e verdades sobre PBE"
         subtitle="Aqui você encontrará textos sobre os mais diversos temas relevantes para a Psicologia Baseada em Evidências, desde discussões clássicas até as últimas novidades da ciência."
+        tag="Texto"
       />
       <ContentContainer>
         <h1 className="title">Mitos e verdades sobre PBE</h1>
@@ -87,13 +88,6 @@ export async function getServerSideProps() {
       title: "o senart eh mito",
       description: `College and University admissions departments see a large variety of transcripts on a regular basis - some from 100-point traditional systems, some from 4-point traditional systems, some from PBE/Standards-Based systems, some from foreign countries, some from home-schooled children, etc. etc..  Time and al and assessment system at a school.  The good School Profile is the "de- coder" for admissions counselors to read a transcript - as long as the two clearly articulate school expectations and systems along with student performance in accordance with those expectations and systems, a student will have a fair shot at admission to their program of choice.`,
       isFact: true,
-    },
-    {
-      id: "1",
-      title:
-        "Colleges and Universities are not familiar with Proficiency-Based Education transcripts",
-      description: `College and University admissions departments see a large variety of transcripts on a regular basis - some from 100-point traditional systems, some from 4-point traditional systems, some from PBE/Standards-Based systems, some from foreign countries, some from home-schooled children, etc. etc..  Time and al and assessment system at a school.  The good School Profile is the "de- coder" for admissions counselors to read a transcript - as long as the two clearly articulate school expectations and systems along with student performance in accordance with those expectations and systems, a student will have a fair shot at admission to their program of choice.`,
-      isFact: false,
     },
     {
       id: "3",

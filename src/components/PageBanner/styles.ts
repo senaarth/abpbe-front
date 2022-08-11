@@ -49,8 +49,11 @@ export const Container = styled.div`
     max-width: 960px;
 
     @media (min-width: 768px) {
-      margin-top: auto;
       font-size: 3.25rem;
+
+      &.mt-auto {
+        margin-top: auto;
+      }
     }
 
     /* &.highlight::after {

@@ -34,7 +34,11 @@ export function PageBanner({
       {!!tag && tag !== "" && (
         <p className={`tag  ${socialMedia ? " mt-auto" : ""}`}>{tag}</p>
       )}
-      <h1 className={`playfair ${isTitleHighlighted ? "highlight" : ""}`}>
+      <h1
+        className={`playfair ${socialMedia ? "mt-auto" : ""} ${
+          isTitleHighlighted ? "highlight" : ""
+        }`}
+      >
         {title}
       </h1>
       {!!subtitle && (
