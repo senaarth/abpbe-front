@@ -10,16 +10,18 @@ interface PageBannerProps {
   isTitleHighlighted?: boolean;
   socialMedia?: boolean;
   tag?: string;
+  scrollDownCall?: boolean;
 }
 
 export function PageBanner({
   img = "/images/bg_library.png",
   title,
   subtitle,
+  tag,
   whiteSubtitle = false,
   isTitleHighlighted = false,
   socialMedia = false,
-  tag,
+  scrollDownCall = false,
 }: PageBannerProps) {
   return (
     <Container
@@ -57,9 +59,11 @@ export function PageBanner({
           </a>
         </SocialMedia>
       )}
-      <ScrollDown>
-        <img src="/images/arrow_down.png" alt="Seta apontando para baixo" />
-      </ScrollDown>
+      {scrollDownCall && (
+        <ScrollDown>
+          <img src="/images/arrow_down.png" alt="Seta apontando para baixo" />
+        </ScrollDown>
+      )}
     </Container>
   );
 }
