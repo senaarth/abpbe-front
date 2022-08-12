@@ -6,7 +6,7 @@ import { Footer } from "../components/Footer";
 
 import { ContentContainer, Page, Button, Content } from "../styles/Estatuto";
 
-export default function Parceiros(): JSX.Element {
+export default function Estatuto(): JSX.Element {
   return (
     <Page>
       <Head>
