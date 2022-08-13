@@ -15,6 +15,7 @@ export const MobileContainer = styled.header`
 
   > div:first-child {
     width: 90%;
+    max-width: 1360px;
 
     display: flex;
     flex-direction: row;
