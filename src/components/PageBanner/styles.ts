@@ -74,6 +74,7 @@ export const Container = styled.div`
     font-weight: 500;
 
     margin: 1.75rem 0;
+    max-width: 1360px;
 
     @media (min-width: 768px) {
       font-size: 1.5rem;
