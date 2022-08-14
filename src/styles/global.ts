@@ -25,6 +25,26 @@ export default createGlobalStyle`
     font-family: "Source Sans 3", sans-serif;
   }
 
+  .d-flex {
+    display: flex;
+  }
+
+  .justify-center {
+    justify-content: center;
+  }
+
+  .justify-between {
+    justify-content: space-between;
+  }
+
+  .align-center {
+    align-items: center;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
   a {
     transition: filter 0.3s;
     
