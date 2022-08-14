@@ -27,9 +27,9 @@ export function PageCall({
   playfairFont = false,
   subtitle,
   btnTxt,
-  onClick = () => { },
+  onClick = () => {},
   inputPlaceholder = "",
-  onSubmit = () => { },
+  onSubmit = () => {},
   onSuccess = "",
   onError = "",
   inputSubmitTxt = "",
@@ -37,11 +37,13 @@ export function PageCall({
   return (
     <Container>
       <h3 className={playfairFont ? "playfair" : ""}>
-        {
-          boldTitle !== "" && regularTitle !== "" ? (
-            <>{boldTitle} <span style={{ fontWeight: 300 }}>{regularTitle}</span></>
-          ) : title
-        }
+        {boldTitle !== "" && regularTitle !== "" ? (
+          <>
+            {boldTitle} <span style={{ fontWeight: 300 }}>{regularTitle}</span>
+          </>
+        ) : (
+          title
+        )}
       </h3>
       {subtitle && <h4>{subtitle}</h4>}
       {btnTxt && onClick && (
