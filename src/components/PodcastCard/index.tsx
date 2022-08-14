@@ -8,10 +8,10 @@ interface PodcastProps {
   link: string;
   banner: string;
   title: string;
-  author: string;
+  owner: string;
 }
 
-export function PodcastCard({ link, banner, title, author }: PodcastProps) {
+export function PodcastCard({ link, banner, title, owner }: PodcastProps) {
   return (
     <PodcastContainer
       onClick={() => {
@@ -24,7 +24,7 @@ export function PodcastCard({ link, banner, title, author }: PodcastProps) {
       </BannerContainer>
       <TextContainer>
         <h2 className="title">{title}</h2>
-        <p className="author">{author}</p>
+        <p className="owner">{owner}</p>
       </TextContainer>
     </PodcastContainer>
   );
