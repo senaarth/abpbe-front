@@ -54,19 +54,26 @@ export const TextContainer = styled.div`
   margin-top: 0.75rem;
 
   .title {
+    font-family: "Open Sans", sans-serif;
     font-size: 2rem;
     font-weight: 400;
     color: ${({ theme }) => theme.dark};
+    text-align: initial;
+
+    ::after {
+      content: "";
+      background: none;
+    }
   }
 
-  .author {
+  .owner {
     font-size: 1.5rem;
     font-weight: 700;
     color: #838383;
   }
 
   .title,
-  .author {
+  .owner {
     text-decoration: none;
   }
 `;
