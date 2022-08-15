@@ -1,5 +1,7 @@
 import React from "react";
 
+import { MailInput } from "../MailInput";
+
 import { Container, ScrollDown, SocialMedia } from "./styles";
 
 interface PageBannerProps {
@@ -11,6 +13,11 @@ interface PageBannerProps {
   socialMedia?: boolean;
   tag?: string;
   scrollDownCall?: boolean;
+  inputPlaceholder?: string;
+  onSubmit?: () => void;
+  onSuccess?: string;
+  onError?: string;
+  inputSubmitTxt?: string;
 }
 
 export function PageBanner({
@@ -22,6 +29,11 @@ export function PageBanner({
   isTitleHighlighted = false,
   socialMedia = false,
   scrollDownCall = false,
+  inputPlaceholder = "",
+  onSubmit = () => {},
+  onSuccess = "",
+  onError = "",
+  inputSubmitTxt = "",
 }: PageBannerProps) {
   return (
     <Container
@@ -44,6 +56,15 @@ export function PageBanner({
       </h1>
       {!!subtitle && (
         <h2 style={{ opacity: whiteSubtitle ? 1 : 0.75 }}>{subtitle}</h2>
+      )}
+      {!!inputPlaceholder && (
+        <MailInput
+          placeholder={inputPlaceholder}
+          onSubmit={() => onSubmit()}
+          onSuccess={onSuccess}
+          onError={onError}
+          btnText={inputSubmitTxt}
+        />
       )}
       {socialMedia && (
         <SocialMedia>

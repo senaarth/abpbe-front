@@ -109,4 +109,56 @@ export default createGlobalStyle`
       }
     }
   }
+
+  .toast-container {
+    * {
+      font-size: 1rem;
+      color: #000;
+      border-radius: 0;
+    }
+
+    > div > div > div:first-child {
+      margin-right: 1rem;
+    }
+
+    .success {
+      background-color: #E3F5E1;
+
+      button {
+        opacity: 1;
+      }
+
+      button path,
+      path {
+        fill: #168821;
+      }
+
+      div[role=progressbar] {
+        background: #168821;
+      }
+    }
+
+    .error {
+      background-color: #FDE0DB;
+
+      button {
+        opacity: 1;
+      }
+
+      button path,
+      path {
+        fill: #E52207;
+      }
+
+      div[role=progressbar] {
+        background: #E52207;
+      }
+    }
+
+    @media (min-width: 481px) {
+      width: 90%;
+      max-width: 1045px;
+      bottom: 5rem;
+    }
+  }
 `;
