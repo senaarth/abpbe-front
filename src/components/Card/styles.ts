@@ -34,7 +34,7 @@ export const CardContainer = styled.a`
 
   .text-container {
     width: 100%;
-
+    min-height: 96px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
