@@ -62,6 +62,7 @@ export default function Podcast({ podcasts }: PodcastProps): JSX.Element {
                 banner={podcast.image}
                 title={podcast.title}
                 owner={podcast.owner}
+                key={podcast.link}
               />
             );
           })}
@@ -106,8 +107,7 @@ export default function Podcast({ podcasts }: PodcastProps): JSX.Element {
             })}
           </div>
         </RelatedContainer> */}
-      </ContentContainer>{" "}
-      *
+      </ContentContainer>
       <Footer />
     </Page>
   );

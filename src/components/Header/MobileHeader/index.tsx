@@ -59,7 +59,7 @@ export function MobileHeader() {
                   onClick={() => {
                     setMenu(false);
                     setConteudo(false);
-                    router.push("/");
+                    router.push("/galeria");
                   }}
                 >
                   <strong>Galeria de artigos acadêmicos</strong>
@@ -70,7 +70,7 @@ export function MobileHeader() {
                   onClick={() => {
                     setMenu(false);
                     setConteudo(false);
-                    router.push("/");
+                    router.push("/cursos");
                   }}
                 >
                   <strong>Cursos online</strong>
@@ -81,7 +81,7 @@ export function MobileHeader() {
                   onClick={() => {
                     setMenu(false);
                     setConteudo(false);
-                    router.push("/");
+                    router.push("/revista");
                   }}
                 >
                   <strong>Revista Indício</strong>
@@ -92,7 +92,7 @@ export function MobileHeader() {
                   onClick={() => {
                     setMenu(false);
                     setConteudo(false);
-                    router.push("/");
+                    router.push("/mitos");
                   }}
                 >
                   <strong>Mitos e verdades sobre PBE</strong>
@@ -103,7 +103,7 @@ export function MobileHeader() {
                   onClick={() => {
                     setMenu(false);
                     setConteudo(false);
-                    router.push("/");
+                    router.push("/podcasts");
                   }}
                 >
                   <strong>Podcast sobre PBE</strong>
@@ -131,7 +131,7 @@ export function MobileHeader() {
                   onClick={() => {
                     setMenu(false);
                     setNovidades(false);
-                    router.push("/");
+                    router.push("/eventos");
                   }}
                 >
                   <strong>Eventos, Congressos e Lives</strong>
@@ -142,7 +142,7 @@ export function MobileHeader() {
                   onClick={() => {
                     setMenu(false);
                     setNovidades(false);
-                    router.push("/");
+                    router.push("/divulgacao");
                   }}
                 >
                   <strong>Divulgação científica</strong>
@@ -155,7 +155,7 @@ export function MobileHeader() {
                   onClick={() => {
                     setMenu(false);
                     setNovidades(false);
-                    router.push("/");
+                    router.push("/noticias");
                   }}
                 >
                   <strong>Notícias</strong>
@@ -186,7 +186,7 @@ export function MobileHeader() {
                   onClick={() => {
                     setMenu(false);
                     setSobre(false);
-                    router.push("/");
+                    router.push("/sobre");
                   }}
                 >
                   <strong>Quem somos</strong>
@@ -200,7 +200,7 @@ export function MobileHeader() {
                   onClick={() => {
                     setMenu(false);
                     setSobre(false);
-                    router.push("/");
+                    router.push("/manifesto");
                   }}
                 >
                   <strong>Manifesto, Missão, Visão e Valores</strong>
@@ -214,7 +214,7 @@ export function MobileHeader() {
                   onClick={() => {
                     setMenu(false);
                     setSobre(false);
-                    router.push("/");
+                    router.push("/faq");
                   }}
                 >
                   <strong>Perguntas frequentes</strong>
@@ -228,7 +228,7 @@ export function MobileHeader() {
                   onClick={() => {
                     setMenu(false);
                     setSobre(false);
-                    router.push("/");
+                    router.push("/estatuto");
                   }}
                 >
                   <strong>Estatuto e transparência</strong>
@@ -237,12 +237,12 @@ export function MobileHeader() {
                     do eiusmod tempor incididunt.
                   </p>
                 </button>
-                <button
+                {/* <button
                   type="button"
                   onClick={() => {
                     setMenu(false);
                     setSobre(false);
-                    router.push("/");
+                    router.push("/privacidade");
                   }}
                 >
                   <strong>Política de privacidade</strong>
@@ -250,7 +250,7 @@ export function MobileHeader() {
                     Lorem ipsum dolor sit amet consectetur adipiscing elit sed
                     do eiusmod tempor incididunt.
                   </p>
-                </button>
+                </button> */}
               </ul>
             </>
           )}
@@ -273,7 +273,7 @@ export function MobileHeader() {
                   onClick={() => {
                     setMenu(false);
                     setFacaParte(false);
-                    router.push("/");
+                    router.push("/associar");
                   }}
                 >
                   <strong>Quero me Associar</strong>
@@ -287,7 +287,7 @@ export function MobileHeader() {
                   onClick={() => {
                     setMenu(false);
                     setFacaParte(false);
-                    router.push("/");
+                    router.push("/doacao");
                   }}
                 >
                   <strong>Quero fazer uma doação</strong>
@@ -306,6 +306,7 @@ export function MobileHeader() {
           onSubmit={() => {
             setMenu(false);
             setInputValue("");
+            router.push("/galeria");
           }}
         />
       </Menu>
