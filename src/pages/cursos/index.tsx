@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import Head from "next/head";
 
 import { PageBanner } from "../../components/PageBanner";
 import { Card } from "../../components/Card";
 import { Footer } from "../../components/Footer";
-import { Tabs } from '../../components/Tabs';
+import { Tabs } from "../../components/Tabs";
 
 import {
   Page,
@@ -26,27 +26,29 @@ interface CursosProps {
 
 export default function Cursos({ courses }: CursosProps): JSX.Element {
   // eslint-disable-next-line no-unused-vars
-  const [activeCategory, setActiveCategory] = useState('BASIC'); // vai ser usado na requisição p/ api
+  const [activeCategory, setActiveCategory] = React.useState("BASIC"); // vai ser usado na requisição p/ api
   const tabs = [
     {
-      label: 'Introdutório',
-      key: 'BASIC',
+      label: "Introdutório",
+      key: "BASIC",
       disabled: false,
     },
     {
-      label: 'Intermediário (em breve)',
-      key: 'INTERMEDIATE',
+      label: "Intermediário (em breve)",
+      key: "INTERMEDIATE",
       disabled: true,
     },
     {
-      label: 'Avançado (em breve)',
-      key: 'ADVANCED',
+      label: "Avançado (em breve)",
+      key: "ADVANCED",
       disabled: true,
     },
   ];
+
   const handleChange = (index) => {
     setActiveCategory(tabs[index].key);
-  }
+  };
+
   return (
     <Page>
       <Head>
@@ -60,9 +62,7 @@ export default function Cursos({ courses }: CursosProps): JSX.Element {
       />
       <ContentContainer>
         <CoursesContainer>
-          <h2 className="title translate-highlight">
-            Nossos cursos
-          </h2>
+          <h2 className="title translate-highlight">Nossos cursos</h2>
           <Tabs tabs={tabs} onChange={handleChange} />
           <CoursesList>
             {courses?.map((item) => {
@@ -94,8 +94,7 @@ export async function getServerSideProps() {
     {
       id: "2",
       image: "",
-      title:
-        "EM BREVE MAIS CURSOS!",
+      title: "EM BREVE MAIS CURSOS!",
       slug: "",
     },
   ];

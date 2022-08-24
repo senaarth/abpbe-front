@@ -25,15 +25,14 @@ export const ContentContainer = styled.main`
   z-index: 1;
 
   > .d-flex {
-
     flex-direction: column;
     justify-content: initial;
     align-items: flex-start;
 
     @media (min-width: 768px) {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
     }
   }
 

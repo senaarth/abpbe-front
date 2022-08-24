@@ -15,12 +15,17 @@
     "test-all": "yarn check-format && yarn check-lint && yarn check-types && yarn build"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
+    "@mui/material": "^5.10.2",
+    "@mui/styled-engine-sc": "^5.10.1",
     "date-fns": "^2.29.1",
     "next": "11.1.2",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "react": "18",
+    "react-dom": "18",
+    "react-tabs": "^5.1.0",
     "react-toastify": "^9.0.8",
-    "styled-components": "^5.3.1"
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
     "@types/node": "^16.9.1",

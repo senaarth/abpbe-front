@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const MobileContainer = styled.header`
+export const Container = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,6 +30,10 @@ export const MobileContainer = styled.header`
         width: 100%;
       }
     }
+  }
+
+  @media (min-width: 1200px) {
+    display: none;
   }
 `;
 
@@ -71,7 +75,7 @@ export const Hamburger = styled.button`
   }
 `;
 
-export const MobileMenu = styled.div`
+export const Menu = styled.div`
   width: 100%;
   height: 100vh;
   overflow-y: auto;

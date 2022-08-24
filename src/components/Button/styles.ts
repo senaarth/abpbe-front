@@ -19,7 +19,7 @@ export const ButtonContainer = styled.button`
   line-height: 54px;
 
   cursor: pointer;
-  transition: filter 0.4s;
+  transition: all 0.4s;
 
   &:hover {
     filter: brightness(0.8);
@@ -28,6 +28,12 @@ export const ButtonContainer = styled.button`
   &.btn-primary {
     border: 1px solid ${({ theme }) => theme.default};
     background-color: ${({ theme }) => theme.default};
+
+    &:hover {
+      filter: none;
+      border: 1px solid #284e85;
+      background-color: #284e85;
+    }
   }
 
   &.btn-secondary {
