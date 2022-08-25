@@ -26,7 +26,7 @@ export default function Mitos({ mitos }: MitosProps): JSX.Element {
   return (
     <Page>
       <Head>
-        <title>Home | ABPBE</title>
+        <title>Mitos e Verdades | ABPBE</title>
       </Head>
       <PageBanner
         img="/images/bg_library_1.png"
