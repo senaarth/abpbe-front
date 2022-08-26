@@ -89,13 +89,13 @@ export async function getServerSideProps() {
       id: "1",
       image: "",
       title: "Introdução a Psicologia Baseada em Evidências",
-      slug: "introducao-a-psicologia-baseada-em-evidencias",
+      slug: "curso-teste",
     },
     {
       id: "2",
       image: "",
       title: "EM BREVE MAIS CURSOS!",
-      slug: "",
+      slug: "curso-teste",
     },
   ];
 

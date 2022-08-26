@@ -26,44 +26,46 @@ export const Content = styled.div`
   form {
     width: 100%;
     label {
-        display: flex;
-        flex-direction: column;
-        color: #313131;
-        font-size: .875rem;
-        font-weight: 600;
-        margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      color: #313131;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-top: 1rem;
 
-        input {
-            height: 3.75rem;
-            font-size: 1rem;
-        }
+      input {
+        height: 3.75rem;
+        font-size: 1rem;
+      }
 
-        textarea {
-            margin-bottom: 2rem;
-        }
-    
-        input, textarea {
-            width: 100%;
-            border-radius: 4px;
-            border: 1px solid #949494;
-            margin-top: .5rem;
-            padding: 1rem;
-        }
+      textarea {
+        margin-bottom: 2rem;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        border-radius: 4px;
+        border: 1px solid #949494;
+        margin-top: 0.5rem;
+        padding: 1rem;
+      }
     }
 
     button {
-        width: 100%;
-        max-width: 756px;
+      width: 100%;
+      max-width: 756px;
 
-        @media (min-width: 768px) {
-            margin-left: auto;
-        }
+      @media (min-width: 768px) {
+        margin-left: auto;
+      }
     }
   }
 `;
 
 export const ContentContainer = styled.main`
-  width: 100%;
+  width: 90%;
+  max-width: 1360px;
 
   display: flex;
   flex-direction: column;
@@ -78,7 +80,7 @@ export const ContentContainer = styled.main`
   }
 
   > * {
-    width: 90%;
+    width: 100%;
   }
 
   > div {
