@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 
 import { PageBanner } from "../components/PageBanner";
 import { Footer } from "../components/Footer";
@@ -39,6 +40,9 @@ export default function Podcast({ podcasts }: PodcastProps): JSX.Element {
 
   return (
     <Page>
+      <Head>
+        <title>Podcasts | ABPBE</title>
+      </Head>
       <PageBanner
         img="/images/bg_laptop.png"
         title="Podcasts"

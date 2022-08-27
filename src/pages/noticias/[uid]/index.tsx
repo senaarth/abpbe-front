@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Head from "next/head";
 
 import { PageBanner } from "../../../components/PageBanner";
 import { Footer } from "../../../components/Footer";
@@ -44,6 +45,9 @@ export default function Noticia({
 
   return (
     <Page>
+      <Head>
+        <title>{noticia?.title || "Notícia"} | ABPBE</title>
+      </Head>
       <PageBanner
         img="/images/bg_analytics.png"
         title="Notícias de ABPBE"

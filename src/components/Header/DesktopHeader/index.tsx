@@ -16,7 +16,7 @@ export function DesktopHeader({
   bgColorFromStart,
 }: DesktopHeaderProps) {
   const router = useRouter();
-  const [transparentBg, setTransparentBg] = React.useState(true);
+  const [transparentBg, setTransparentBg] = React.useState(!bgColorFromStart);
 
   function handleScroll() {
     if (window.scrollY <= 87) {
