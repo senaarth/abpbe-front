@@ -78,10 +78,10 @@ export default createGlobalStyle`
     }
 
     &.translate-highlight {
-      padding-left: 0.75ch; 
+      /* padding-left: 0.75ch;  */
       
       &::after {
-        left: -0.25ch;
+        left: -1ch;
       }
     }
 

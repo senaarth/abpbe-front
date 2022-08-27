@@ -11,7 +11,7 @@ export default function Divulgacao(): JSX.Element {
   return (
     <Page>
       <Head>
-        <title>Divulgacao | ABPBE</title>
+        <title>Divulgação | ABPBE</title>
       </Head>
       <PageBanner
         img="/images/bg_glasses.png"
