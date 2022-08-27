@@ -27,20 +27,20 @@ export const Content = styled.div`
     font-size: 1rem;
     font-weight: 500;
     margin-bottom: 1rem;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
   }
 
   .datetime {
     font-size: 1rem;
     font-weight: 800;
-    color: #8C8989;
+    color: #8c8989;
     margin-right: auto;
   }
 
   hr {
-    border-top: 1px solid #88C9D0;
+    border-top: 1px solid #88c9d0;
     width: 100%;
-    margin-top: .75rem;
+    margin-top: 0.75rem;
     margin-bottom: 2.7rem;
   }
 
@@ -67,90 +67,89 @@ export const Content = styled.div`
     width: 100%;
 
     @media (min-width: 1280px) {
-        flex-direction: row;
+      flex-direction: row;
     }
 
-
-    .content-text, div > .content-text {
-        width: 100%;
-        margin-bottom: 1.5rem;
+    .content-text,
+    div > .content-text {
+      width: 100%;
+      margin-bottom: 1.5rem;
     }
 
     div {
-        @media (min-width: 1280px) {
-            width: 95%;
-        }
+      @media (min-width: 1280px) {
+        width: 95%;
+      }
     }
 
     .box {
-        background-color:#46749512;
-        border-left: 8px solid #9DC8CF;
-        border-top-right-radius: 8px;
-        border-bottom-right-radius: 8px;
-        padding: 1rem;
-        margin-bottom: 1.5rem;
+      background-color: #46749512;
+      border-left: 8px solid #9dc8cf;
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
 
+      @media (min-width: 1280px) {
+        width: 53rem;
+      }
+
+      &.last {
         @media (min-width: 1280px) {
-            width: 53rem;
+          margin-left: 1.5rem;
         }
+      }
 
-        &.last {
-            @media (min-width: 1280px) {
-                margin-left: 1.5rem;
-            }
+      &.first {
+        @media (min-width: 1280px) {
+          margin-right: 1.5rem;
         }
+      }
 
-        &.first {
-            @media (min-width: 1280px) {
-                margin-right: 1.5rem;
-            }
+      p {
+        margin: 0 1.5rem;
+      }
+
+      img {
+        width: 17px;
+
+        &.close {
+          margin-left: 90%;
         }
-
-        p {
-            margin: 0 1.5rem;
-        }
-
-        img {
-            width: 17px;
-            
-
-            &.close {
-                margin-left: 90%;
-            }
-        }
+      }
     }
   }
 `;
 
 export const InfoContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    gap: 3.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 3.5rem;
 
-    .info {
-        h1 {
-            color: #000;
-            text-align: center;
-        }
-
-        div {
-            margin-top: 3.2rem;
-            width: 20.5rem;
-            height: 15.75rem;
-
-            &.mission {
-                background-color: #4674954D;
-            }
-
-            &.vision {
-                background-color: #9DC8CF66;
-            }
-
-            &.values {
-                background-color: #284E8533;
-            }
-        }
+  .info {
+    h1 {
+      color: #000;
+      text-align: center;
     }
+
+    div {
+      margin-top: 3.2rem;
+      width: 20.5rem;
+      height: 15.75rem;
+
+      &.mission {
+        background-color: #4674954d;
+      }
+
+      &.vision {
+        background-color: #9dc8cf66;
+      }
+
+      &.values {
+        background-color: #284e8533;
+      }
+    }
+  }
 `;
 
 export const ContentContainer = styled.main`
@@ -171,6 +170,7 @@ export const ContentContainer = styled.main`
 
   > * {
     width: 90%;
+    max-width: 1360px;
   }
 
   > div {
