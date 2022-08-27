@@ -27,33 +27,38 @@ export default function Associar(): JSX.Element {
         </h1>
         <Content>
           <h1 className="playfair">
-            Gostaria de se associar na ABPBE? <span className="highlighted">Se inscreva no nosso banco de talentos:</span>
+            Gostaria de se associar na ABPBE?{" "}
+            <span className="highlighted">
+              Se inscreva no nosso banco de talentos:
+            </span>
           </h1>
           <div className="d-flex">
             <div>
-            <img src="images/card_placeholder.png" alt="Fundo de exemplo" />
-          </div>
-          <div>
-            <h2 className="playfair">Preencha os campos com suas informações</h2>
-          <form action="">
-            <label htmlFor="name">
-                Nome completo
-                <input id="name" />
-            </label>
+              <img src="images/card_placeholder.png" alt="Fundo de exemplo" />
+            </div>
+            <div>
+              <h2 className="playfair">
+                Preencha os campos com suas informações
+              </h2>
+              <form action="">
+                <label htmlFor="name">
+                  Nome completo
+                  <input id="name" />
+                </label>
 
-            <label htmlFor="email">
-                Endereço de e-mail
-                <input id="email" placeholder="exemplo: tom@gmail.com"/>
-            </label>
+                <label htmlFor="email">
+                  Endereço de e-mail
+                  <input id="email" placeholder="exemplo: tom@gmail.com" />
+                </label>
 
-            <label htmlFor="description">
-                Por que você deseja fazer parte de ABPBE?
-                <textarea id="description" rows={10}/>
-            </label>
+                <label htmlFor="description">
+                  Por que você deseja fazer parte de ABPBE?
+                  <textarea id="description" rows={10} />
+                </label>
 
-            <Button text="QUERO ME INSCREVER" type="submit" />
-          </form>
-          </div>
+                <Button text="QUERO ME INSCREVER" type="submit" />
+              </form>
+            </div>
           </div>
         </Content>
       </ContentContainer>

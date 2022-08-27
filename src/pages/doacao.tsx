@@ -27,26 +27,27 @@ export default function Doacao(): JSX.Element {
         </h1>
         <Content>
           <h1 className="playfair">
-            Preencha os campos com suas informações caso queira fazer uma doação para contribuir com a associação
+            Preencha os campos com suas informações caso queira fazer uma doação
+            para contribuir com a associação
           </h1>
-            <form action="">
-                <label htmlFor="name">
-                    Nome completo
-                    <input id="name" />
-                </label>
+          <form action="">
+            <label htmlFor="name">
+              Nome completo
+              <input id="name" />
+            </label>
 
-                <label htmlFor="email">
-                    Endereço de e-mail
-                    <input id="email" placeholder="exemplo: tom@gmail.com"/>
-                </label>
+            <label htmlFor="email">
+              Endereço de e-mail
+              <input id="email" placeholder="exemplo: tom@gmail.com" />
+            </label>
 
-                <label htmlFor="description">
-                    Por qual motivo você gostaria de contribuir para a ABPBE?
-                    <textarea id="description" rows={10}/>
-                </label>
+            <label htmlFor="description">
+              Por qual motivo você gostaria de contribuir para a ABPBE?
+              <textarea id="description" rows={10} />
+            </label>
 
-                <Button text="REALIZAR PAGAMENTO" type="submit" />
-            </form>
+            <Button text="REALIZAR PAGAMENTO" type="submit" />
+          </form>
         </Content>
       </ContentContainer>
       <Footer />
