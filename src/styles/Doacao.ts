@@ -64,7 +64,8 @@ export const Content = styled.div`
 `;
 
 export const ContentContainer = styled.main`
-  width: 100%;
+  width: 90%;
+  max-width: 1360px;
 
   display: flex;
   flex-direction: column;
@@ -79,7 +80,7 @@ export const ContentContainer = styled.main`
   }
 
   > * {
-    width: 90%;
+    width: 100%;
   }
 
   > div {

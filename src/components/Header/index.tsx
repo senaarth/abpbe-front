@@ -7,8 +7,8 @@ import { DesktopHeader } from "./DesktopHeader";
 export function Header() {
   const router = useRouter();
   const headerColor = "#fff";
-  const bgColorFromStart =
-    router?.asPath?.includes("/cursos/") || router?.asPath?.includes("revisor");
+  const bgColorFromStart = router?.asPath?.includes("/cursos/") ||
+    router?.asPath?.includes("/revisor");
 
   return (
     <>
