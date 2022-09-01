@@ -15,7 +15,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
       <Header />
       <Component {...pageProps} />
       <GlobalStyle />
-      <ToastContainer position="bottom-center" className="toast-container" />
+      <ToastContainer position="top-center" className="toast-container" />
     </ThemeProvider>
   );
 };

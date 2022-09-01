@@ -158,7 +158,7 @@ export default createGlobalStyle`
     @media (min-width: 481px) {
       width: 90%;
       max-width: 1045px;
-      bottom: 5rem;
+      top: 5rem;
     }
   }
 `;
