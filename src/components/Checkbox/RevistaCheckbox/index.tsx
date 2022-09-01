@@ -24,7 +24,7 @@ export function RevistaCheckbox(props: CheckboxProps) {
       control={
         <Checkbox
           sx={{
-            "&:hover": { bgcolor: "transparent" },
+            "&:hover": { filter: "brightness(0.8)" },
           }}
           disableRipple
           color="default"

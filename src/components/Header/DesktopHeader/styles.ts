@@ -119,10 +119,11 @@ export const GlassIcon = styled.svg`
   margin-left: 1.5rem;
 
   cursor: pointer;
-  transition: transform 0.4s;
+  transition: all 0.4s;
 
   &:hover {
     transform: scale(1.15);
+    filter: brightness(0.8);
   }
 
   path {

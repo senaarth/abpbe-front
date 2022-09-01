@@ -1,6 +1,6 @@
 import React from "react";
 import { Menu, MenuItem } from "@mui/material";
-import { styled, alpha } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import { MenuProps } from "@mui/material/Menu";
 import { useRouter } from "next/router";
 
@@ -48,17 +48,12 @@ const StyledMenu = styled((props: MenuProps) => (
       padding: "8px 0 0 0",
     },
     "& .MuiMenuItem-root": {
+      background: "white",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
       padding: "1.5rem 1rem 1rem",
-      "&:active": {
-        backgroundColor: alpha(
-          theme.palette.primary.main,
-          theme.palette.action.selectedOpacity
-        ),
-      },
       "b, p": {
         textAlign: "center",
       },
@@ -79,6 +74,9 @@ const StyledMenu = styled((props: MenuProps) => (
         background: "#DEE7EECC",
         position: "absolute",
         bottom: -1,
+      },
+      "&:hover": {
+        filter: "brightness(0.8)",
       },
     },
     "&::after": {
