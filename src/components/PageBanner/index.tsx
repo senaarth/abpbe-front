@@ -1,6 +1,7 @@
 import React from "react";
 
 import { MailInput } from "../MailInput";
+import { scrollIntoView } from "../../utils/scrollIntoView";
 
 import { Container, ScrollDown, SocialMedia } from "./styles";
 
@@ -37,6 +38,7 @@ export function PageBanner({
 }: PageBannerProps) {
   return (
     <Container
+      id="page-banner"
       style={{
         background: `url(${
           img !== "" && !!img ? img : "/images/bg_library.png"
@@ -86,7 +88,7 @@ export function PageBanner({
         </SocialMedia>
       )}
       {scrollDownCall && (
-        <ScrollDown>
+        <ScrollDown onClick={() => scrollIntoView("main")}>
           <img src="/images/arrow_down.png" alt="Seta apontando para baixo" />
         </ScrollDown>
       )}

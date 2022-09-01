@@ -83,12 +83,17 @@ export const Container = styled.div`
   }
 `;
 
-export const ScrollDown = styled.div`
+export const ScrollDown = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
 
   width: 100%;
+  max-width: 7rem;
+
+  background: transparent;
+  cursor: pointer;
+  border: 0;
 
   position: absolute;
   left: 50%;
@@ -100,8 +105,11 @@ export const ScrollDown = styled.div`
   }
 
   &::after {
+    cursor: pointer;
     content: "Role para baixo";
     position: absolute;
+
+    width: 100%;
 
     left: 50%;
     top: calc(-100% - 16px);
@@ -110,6 +118,10 @@ export const ScrollDown = styled.div`
     color: ${({ theme }) => theme.aux1};
     font-size: 0.75rem;
     font-weight: 600;
+  }
+
+  &:hover {
+    filter: brightness(0.8);
   }
 
   /* @media (min-width: 768px) {
