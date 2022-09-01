@@ -16,11 +16,35 @@ export function MobileHeader() {
   const [sobre, setSobre] = React.useState<boolean>(false);
   const [facaParte, setFacaParte] = React.useState<boolean>(false);
 
+  const [scrolled, setScrolled] = React.useState<boolean>(false);
+
+  function handleScroll() {
+    if (window.scrollY >= 78) {
+      setScrolled(true);
+      return;
+    }
+
+    setScrolled(false);
+  }
+
+  React.useEffect(() => {
+    if (!window) return;
+
+    window.addEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <Container>
       <div>
         <a href="/">
-          <img src="/images/logo_gray_horizontal.png" alt="Logo ABPBE" />
+          <img
+            src={
+              scrolled
+                ? "/images/logo_horizontal_gray_text.png"
+                : "/images/logo_gray_horizontal.png"
+            }
+            alt="Logo ABPBE"
+          />
         </a>
         <Hamburger
           className={menu ? "open" : ""}
@@ -268,6 +292,20 @@ export function MobileHeader() {
                 />
               </button>
               <ul className={facaParte ? "open" : ""}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMenu(false);
+                    setFacaParte(false);
+                    router.push("/revisor");
+                  }}
+                >
+                  <strong>Quero ser Revisor</strong>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipiscing elit sed
+                    do eiusmod tempor incididunt.
+                  </p>
+                </button>
                 <button
                   type="button"
                   onClick={() => {

@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 import { PageBanner } from "../components/PageBanner";
 import { Button } from "../components/Button";
@@ -30,7 +30,7 @@ interface RevistaProps {
 }
 
 export default function Revista({ articles }: RevistaProps): JSX.Element {
-  // const router = useRouter();
+  const router = useRouter();
 
   return (
     <Page>
@@ -112,7 +112,12 @@ export default function Revista({ articles }: RevistaProps): JSX.Element {
             aceitá-lo sem modificações. Os revisores não terão conhecimento
             sobre nenhum dado acerca dos autores.
           </p>
-          <Button type="button" text="QUERO ME CANDIDATAR" variant="primary" />
+          <Button
+            type="button"
+            text="QUERO ME CANDIDATAR"
+            variant="primary"
+            onClick={() => router.push("revisor")}
+          />
         </Main>
         <h3 id="textos" className="playfair">
           Textos publicados

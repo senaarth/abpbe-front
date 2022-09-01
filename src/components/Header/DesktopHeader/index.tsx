@@ -140,8 +140,14 @@ export function DesktopHeader({
               label="Faça parte"
               menuItems={[
                 {
+                  title: "Quero ser revisor",
+                  subtitle:
+                    "Faça parte da criação de conteúdo da nossa plataforma.",
+                  route: "/revisor",
+                },
+                {
                   title: "Quero me associar",
-                  subtitle: "Encontre diversos artigos publicados sobre PBE",
+                  subtitle: "Encontre diversos artigos publicados sobre PBE.",
                   route: "/associar",
                 },
                 {
