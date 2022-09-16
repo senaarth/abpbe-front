@@ -53,7 +53,11 @@ export const Content = styled.div`
   .d-flex {
     width: 100%;
     flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+
     @media (min-width: 768px) {
+      margin-top: 0;
       flex-direction: row;
       gap: 2.75rem;
       margin-top: 2.5rem;
@@ -66,7 +70,11 @@ export const Content = styled.div`
     }
   }
 
-  form {
+  iframe {
+    min-height: 525px;
+  }
+
+  /* form {
     width: 100%;
     label {
       display: flex;
@@ -101,7 +109,7 @@ export const Content = styled.div`
         margin-left: auto;
       }
     }
-  }
+  } */
 `;
 
 export const ContentContainer = styled.main`

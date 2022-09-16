@@ -7,6 +7,7 @@ import Document, {
   Main,
   NextScript,
 } from "next/document";
+import Script from "next/script";
 import { ServerStyleSheet } from "styled-components";
 
 export default class MyDocument extends Document {
@@ -85,6 +86,10 @@ export default class MyDocument extends Document {
 
           <meta property="og:image:width" content="200" />
           <meta property="og:image:height" content="200" />
+          <Script
+            src="https://app.glueup.com/compiled/js/eb-widgets.min.js"
+            type="text/javascript"
+          />
         </Head>
         <body>
           <Main />

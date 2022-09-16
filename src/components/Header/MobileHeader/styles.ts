@@ -95,6 +95,14 @@ export const Menu = styled.div`
     inset: 0;
   }
 
+  .associado {
+    font-weight: 600;
+    font-size: 1rem;
+    color: ${({ theme }) => theme.gray600};
+    text-decoration: none;
+    margin-top: 1.875rem;
+  }
+
   nav {
     display: flex;
     flex-direction: column;

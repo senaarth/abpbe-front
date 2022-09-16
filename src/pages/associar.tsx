@@ -3,7 +3,7 @@ import Head from "next/head";
 
 import { PageBanner } from "../components/PageBanner";
 import { Footer } from "../components/Footer";
-import { Button } from "../components/Button";
+// import { Button } from "../components/Button";
 
 import { ContentContainer, Page, Content } from "../styles/Associar";
 
@@ -34,31 +34,32 @@ export default function Associar(): JSX.Element {
           </h1>
           <div className="d-flex">
             <div>
-              <img src="images/card_placeholder.png" alt="Fundo de exemplo" />
+              <img
+                src="images/card_placeholder.png"
+                alt="Fundo de exemplo"
+                style={{ margin: "0 !important", padding: "0 !important" }}
+              />
             </div>
-            <div>
-              <h2 className="playfair">
-                Preencha os campos com suas informações
-              </h2>
-              <form action="">
-                <label htmlFor="name">
-                  Nome completo
-                  <input id="name" />
-                </label>
-
-                <label htmlFor="email">
-                  Endereço de e-mail
-                  <input id="email" placeholder="exemplo: tom@gmail.com" />
-                </label>
-
-                <label htmlFor="description">
-                  Por que você deseja fazer parte de ABPBE?
-                  <textarea id="description" rows={10} />
-                </label>
-
-                <Button text="QUERO ME INSCREVER" type="submit" />
-              </form>
-            </div>
+            <iframe
+              title="eb-widget-associar"
+              className="eb-widget"
+              id="eb-widget-membership-type-list"
+              name="eb-widget-membership-type-list"
+              data-auto-adjust-height="false"
+              data-auto-adjust-width="true"
+              style={{
+                display: "block",
+                margin: 0,
+                padding: 0,
+                border: 0,
+                outline: 0,
+                fontSize: "100%",
+                verticalAlign: "baseline",
+                background: "transparent",
+                flex: 1,
+              }}
+              src="https://app.glueup.com/organization/4543/widget/membership-type-list/"
+            />
           </div>
         </Content>
       </ContentContainer>

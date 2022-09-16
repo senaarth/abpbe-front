@@ -347,6 +347,9 @@ export function MobileHeader() {
             router.push("/galeria");
           }}
         />
+        <a href="/associado" className="associado">
+          Associado
+        </a>
       </Menu>
     </Container>
   );

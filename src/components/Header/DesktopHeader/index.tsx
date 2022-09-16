@@ -165,10 +165,10 @@ export function DesktopHeader({
         <Button
           type="button"
           variant="primary"
-          text="ENTRAR"
-          onClick={() => {}}
+          text="ASSOCIADO"
+          onClick={() => router.push("/associado")}
           customStyles={{
-            maxWidth: 100,
+            maxWidth: 120,
             maxHeight: 32,
             borderRadius: 12,
             fontSize: "0.875rem",
