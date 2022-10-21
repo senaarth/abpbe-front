@@ -10,6 +10,8 @@ export const Container = styled.footer`
   justify-content: center;
 
   background-image: url(/images/bg_library.png);
+
+  border-radius: 8px 8px 0 0;
 `;
 
 export const Content = styled.div`
@@ -24,15 +26,13 @@ export const Content = styled.div`
   align-items: center;
   justify-content: center;
 
-  gap: 5.1875rem;
+  gap: 1.75rem;
 
   @media (min-width: 1280px) {
     padding: 6.375rem 0 4.5rem;
 
     flex-direction: row;
     align-items: flex-start;
-
-    gap: 1.75rem;
   }
 `;
 
@@ -95,11 +95,31 @@ export const Nav = styled.nav`
   flex-direction: column;
   align-items: center;
 
-  h5 {
+  h5,
+  button {
     font-size: 1rem;
     line-height: 1.375rem;
     color: ${({ theme }) => theme.aux1};
     font-weight: 600;
+  }
+
+  h5 {
+    display: none;
+  }
+
+  button {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 1rem;
+      margin-left: 1.375rem;
+      object-fit: contain;
+    }
   }
 
   ul {
@@ -110,20 +130,42 @@ export const Nav = styled.nav`
     align-items: center;
 
     a {
-      font-size: 0.875rem;
       line-height: 1.1875rem;
       text-align: center;
       text-align: center;
       color: ${({ theme }) => theme.blueWarm};
       text-decoration: none;
+      transition: all 0.3s;
+
+      font-size: 0;
     }
 
     a + a {
       margin-top: 1.375rem;
     }
+
+    height: 0;
+    overflow: hidden;
+    transition: all 0.3s;
+
+    &.active {
+      height: unset;
+
+      a {
+        font-size: 0.875rem;
+      }
+    }
   }
 
   @media (min-width: 1280px) {
+    h5 {
+      display: flex;
+    }
+
+    button {
+      display: none;
+    }
+
     &,
     ul {
       align-items: flex-start;
@@ -136,8 +178,11 @@ export const Nav = styled.nav`
     }
 
     ul {
+      height: unset;
+
       a {
         text-align: left;
+        font-size: 0.875rem;
       }
 
       a + a {

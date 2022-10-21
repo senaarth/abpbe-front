@@ -3,6 +3,11 @@ import React from "react";
 import { Container, Content, Bottom, Head, SocialMedia, Nav } from "./styles";
 
 export function Footer() {
+  const [conteudo, setConteudo] = React.useState(false);
+  const [novidades, setNovidades] = React.useState(false);
+  const [sobre, setSobre] = React.useState(false);
+  const [facaParte, setFacaParte] = React.useState(false);
+
   return (
     <Container>
       <Content>
@@ -32,65 +37,81 @@ export function Footer() {
         </Head>
         <Nav>
           <h5>Conteúdo sobre PBE</h5>
-          <ul>
-            <a href="/" target="_blank" rel="noreferrer">
+          <button type="button" onClick={() => setConteudo(!conteudo)}>
+            Conteúdo sobre PBE
+            <img src="/images/chevron_down.png" alt="Seta para baixo" />
+          </button>
+          <ul className={conteudo ? "active" : ""}>
+            <a href="/galeria" rel="noreferrer">
               Galeria de artigos acadêmicos
             </a>
-            <a href="/" target="_blank" rel="noreferrer">
+            <a href="/cursos" rel="noreferrer">
               Cursos online
             </a>
-            <a href="/" target="_blank" rel="noreferrer">
+            <a href="/revista" rel="noreferrer">
               Revista Indicium da ABPBE
             </a>
-            <a href="/" target="_blank" rel="noreferrer">
+            <a href="/mitos" rel="noreferrer">
               Mitos e verdades sobre PBE
             </a>
-            <a href="/" target="_blank" rel="noreferrer">
+            <a href="/podcasts" rel="noreferrer">
               Podcast sobre PBE
             </a>
           </ul>
         </Nav>
         <Nav>
           <h5>Novidades</h5>
-          <ul>
-            <a href="/" target="_blank" rel="noreferrer">
+          <button type="button" onClick={() => setNovidades(!novidades)}>
+            Novidades
+            <img src="/images/chevron_down.png" alt="Seta para baixo" />
+          </button>
+          <ul className={novidades ? "active" : ""}>
+            <a href="/eventos" rel="noreferrer">
               Eventos, Congressos e Lives
             </a>
-            <a href="/" target="_blank" rel="noreferrer">
+            <a href="/divulgacao" rel="noreferrer">
               Divulgação científica
             </a>
-            <a href="/" target="_blank" rel="noreferrer">
+            <a href="/noticias" rel="noreferrer">
               Notícias da ABPBE
             </a>
           </ul>
         </Nav>
         <Nav>
           <h5>Sobre a associação</h5>
-          <ul>
-            <a href="/" target="_blank" rel="noreferrer">
+          <button type="button" onClick={() => setSobre(!sobre)}>
+            Sobre a associação
+            <img src="/images/chevron_down.png" alt="Seta para baixo" />
+          </button>
+          <ul className={sobre ? "active" : ""}>
+            <a href="/sobre" rel="noreferrer">
               Quem somos
             </a>
-            <a href="/" target="_blank" rel="noreferrer">
+            <a href="/manifesto" rel="noreferrer">
               Manifesto, missão, visão e valores
             </a>
-            <a href="/" target="_blank" rel="noreferrer">
+            <a href="/faq" rel="noreferrer">
               Perguntas frequentes
             </a>
-            <a href="/" target="_blank" rel="noreferrer">
+            <a href="/estatuto" rel="noreferrer">
               Estatuto e transparência
             </a>
-            <a href="/" target="_blank" rel="noreferrer">
+            {/* <a href="/privacidade" rel="noreferrer">
               Política de privacidade
-            </a>
+            </a> */}
           </ul>
         </Nav>
         <Nav>
           <h5>Faça parte</h5>
-          <ul>
-            <a href="/" target="_blank" rel="noreferrer">
+          <button type="button" onClick={() => setFacaParte(!facaParte)}>
+            Faça parte
+            <img src="/images/chevron_down.png" alt="Seta para baixo" />
+          </button>
+          <ul className={facaParte ? "active" : ""}>
+            <a href="/associar" rel="noreferrer">
               Quero me associar
             </a>
-            <a href="/" target="_blank" rel="noreferrer">
+            <a href="/doacao" rel="noreferrer">
               Quero fazer uma doação
             </a>
           </ul>
