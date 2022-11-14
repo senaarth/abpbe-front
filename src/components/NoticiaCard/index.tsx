@@ -3,21 +3,33 @@ import { useRouter } from "next/router";
 
 import { Container, CardFooter } from "./styles";
 
-export function NoticiaCard() {
+interface NoticiaCardProps {
+  id: string;
+  title: string;
+  description: string;
+  author: string;
+  date: string;
+}
+
+export function NoticiaCard({
+  id,
+  title,
+  description,
+  author,
+  date,
+}: NoticiaCardProps) {
   const router = useRouter();
 
   return (
-    <Container onClick={() => router.push("/noticias/noticia-teste")}>
+    <Container onClick={() => router.push(`/noticias/${id}`)}>
       <h5>EVENTOS</h5>
-      <h3 className="playfair">Título da Notícia</h3>
-      <h4>
-        Compressing the monitor wont do anything, we need to synthesize the
-        cross-platform HTTP feed.
-      </h4>
+      <h3 className="playfair">{title}</h3>
+      {/* eslint-disable-next-line react/no-danger */}
+      <h4 dangerouslySetInnerHTML={{ __html: description }} />
       <CardFooter>
         <div>
-          <b>Nome Revisor</b>
-          <p>Março 21, 2021</p>
+          <b>{author}</b>
+          <p>{date}</p>
         </div>
         <svg
           width="21"

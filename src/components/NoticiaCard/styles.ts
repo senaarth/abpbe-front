@@ -45,6 +45,12 @@ export const Container = styled.div`
   h4 {
     font-size: 1rem;
     color: #1a3547cc;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   h5 {

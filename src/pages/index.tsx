@@ -8,6 +8,8 @@ import { Card } from "../components/Card";
 import { PageCall } from "../components/PageCall";
 import { Footer } from "../components/Footer";
 
+import { api } from "../services/api";
+
 import {
   Page,
   ContentContainer,
@@ -20,7 +22,6 @@ import {
 type News = {
   id: string;
   title: string;
-  slug: string;
   image: string;
 };
 
@@ -84,7 +85,7 @@ export default function Home({ news }: HomeProps): JSX.Element {
               return (
                 <Card
                   key={item.id}
-                  link={`/noticias/${item.slug}`}
+                  link={`/noticias/${item.id}`}
                   targetBlank={false}
                   {...item}
                 />
@@ -109,27 +110,27 @@ export default function Home({ news }: HomeProps): JSX.Element {
 }
 
 export async function getServerSideProps() {
-  const news = [
-    {
-      id: "1",
-      image: "",
-      title: "ABPBE participou da Recepção de Calouros da UFMG",
-      slug: "recepcao-calouros-ufmg",
+  const { data } = await api.get("/news", {
+    params: {
+      data: {
+        limit: 3,
+        orderBy: "creationDate",
+      },
     },
-    {
-      id: "2",
-      image: "",
-      title:
-        "Colaborador da ABPBE esteve na audiência pública do Senado Federal se posicionando contra a Constelação Familiar",
-      slug: "colaborador-audiencia-publica-senado",
-    },
-    {
-      id: "3",
-      image: "/images/bg_librar.png",
-      title: "ABPBE participou de uma entrevista no portal Comporte-se",
-      slug: "abpbe-entrevista-portal-comporte-se",
-    },
-  ];
+  });
+
+  const news = data?.reduce((acc, curr, index) => {
+    if (index > 2) return acc;
+
+    return [
+      ...acc,
+      {
+        // eslint-disable-next-line no-underscore-dangle
+        id: curr._id,
+        ...curr,
+      },
+    ];
+  }, []);
 
   return {
     props: {

@@ -1,9 +1,18 @@
 import React from "react";
-import MuiPagination, { PaginationProps } from "@mui/material/Pagination";
+import MuiPagination, {
+  PaginationProps as MuiPaginationProps,
+} from "@mui/material/Pagination";
 import { styled } from "@mui/material/styles";
 import { Container } from "./styles";
 
-export const PaginationComponent = styled((props: PaginationProps) => (
+interface PaginationProps {
+  page: number;
+  totalPages: number;
+  // eslint-disable-next-line no-unused-vars
+  onChangePage: (page: string) => void;
+}
+
+export const PaginationComponent = styled((props: MuiPaginationProps) => (
   <MuiPagination {...props} />
 ))(() => ({
   "&, *": {
@@ -25,16 +34,23 @@ export const PaginationComponent = styled((props: PaginationProps) => (
   },
 }));
 
-export function Pagination() {
+export function Pagination({
+  page,
+  totalPages,
+  onChangePage,
+}: PaginationProps) {
   return (
     <Container>
       <PaginationComponent
-        count={10}
+        count={totalPages}
         siblingCount={1}
         variant="outlined"
         shape="rounded"
         hidePrevButton
         hideNextButton
+        page={page}
+        // @ts-ignore
+        onChange={({ target }) => onChangePage(target.innerText)}
       />
     </Container>
   );
