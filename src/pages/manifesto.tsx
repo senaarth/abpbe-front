@@ -10,6 +10,7 @@ import {
   Content,
   InfoContainer,
 } from "../styles/Manifesto";
+import { api } from "../services/api";
 
 export default function Manifesto(): JSX.Element {
   return (
@@ -215,4 +216,14 @@ export default function Manifesto(): JSX.Element {
       <Footer />
     </Page>
   );
+}
+
+export async function getServerSideProps() {
+  const { data } = await api.get("/manifesto");
+
+  console.log(data);
+
+  return {
+    props: {},
+  };
 }

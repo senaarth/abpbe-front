@@ -6,6 +6,8 @@ import { Card } from "../../components/Card";
 import { Footer } from "../../components/Footer";
 import { Tabs } from "../../components/Tabs";
 
+import { api } from "../../services/api";
+
 import {
   Page,
   ContentContainer,
@@ -15,8 +17,7 @@ import {
 
 type Courses = {
   id: string;
-  title: string;
-  slug: string;
+  name: string;
   image: string;
 };
 
@@ -69,8 +70,9 @@ export default function Cursos({ courses }: CursosProps): JSX.Element {
               return (
                 <Card
                   key={item.id}
-                  link={`/cursos/${item.slug}`}
+                  link={`/cursos/${item.id}`}
                   targetBlank={false}
+                  title={item?.name}
                   {...item}
                 />
               );
@@ -84,20 +86,18 @@ export default function Cursos({ courses }: CursosProps): JSX.Element {
 }
 
 export async function getServerSideProps() {
-  const courses = [
-    {
-      id: "1",
-      image: "",
-      title: "Introdução a Psicologia Baseada em Evidências",
-      slug: "curso-teste",
-    },
-    {
-      id: "2",
-      image: "",
-      title: "EM BREVE MAIS CURSOS!",
-      slug: "curso-teste",
-    },
-  ];
+  const { data } = await api.get("/courses");
+
+  const courses = data?.reduce((acc, curr) => {
+    return [
+      ...acc,
+      {
+        // eslint-disable-next-line no-underscore-dangle
+        id: curr?._id,
+        ...curr,
+      },
+    ];
+  }, []);
 
   return {
     props: {

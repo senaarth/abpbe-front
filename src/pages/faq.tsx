@@ -6,6 +6,7 @@ import { PageBanner } from "../components/PageBanner";
 import { Footer } from "../components/Footer";
 
 import { Page, ContentContainer } from "../styles/Faq";
+import { api } from "../services/api";
 
 type Question = {
   summary: string;
@@ -43,28 +44,19 @@ export default function Faq({ questions }: FaqProps): JSX.Element {
 }
 
 export async function getServerSideProps() {
-  const questions = [
-    {
-      summary: "Questão 1",
-      details:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
-    },
-    {
-      summary: "Questão 2",
-      details:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
-    },
-    {
-      summary: "Questão 3",
-      details:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
-    },
-    {
-      summary: "Questão 4",
-      details:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
-    },
-  ];
+  const { data } = await api.get("/questions");
+
+  const questions = data?.reduce((acc, curr) => {
+    return [
+      ...acc,
+      {
+        // eslint-disable-next-line no-underscore-dangle
+        id: curr?._id,
+        summary: curr?.question,
+        details: curr?.reply,
+      },
+    ];
+  }, []);
 
   return {
     props: {
