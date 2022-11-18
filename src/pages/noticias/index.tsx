@@ -7,15 +7,58 @@ import { NoticiaCard } from "../../components/NoticiaCard";
 import { Card } from "../../components/Card";
 import { Pagination } from "../../components/Pagination";
 
+import { api } from "../../services/api";
+import { scrollIntoView } from "../../utils/scrollIntoView";
+
 import { Page, ContentContainer, NewsContainer } from "../../styles/Noticias";
 
-// type News = {};
+type News = {
+  id: string;
+  title: string;
+  description: string;
+  author: string;
+  date: string;
+};
 
-// interface CursosProps {
-//   news: News[];
-// }
+interface NoticiasProps {
+  news: News[];
+  totalPages: number;
+}
 
-export default function Noticias(): JSX.Element {
+export default function Noticias({
+  news,
+  totalPages,
+}: NoticiasProps): JSX.Element {
+  const [page, setPage] = React.useState(1);
+  const [paginatedNews, setPaginatedNews] = React.useState(news);
+
+  React.useEffect(() => {
+    if (page === 1) return;
+
+    // eslint-disable-next-line func-names
+    (async function () {
+      const { data } = await api.get("/news", {
+        params: { skip: (page - 1) * 6, limit: 6 },
+      });
+
+      const updatedNews = data?.reduce((acc, curr, index) => {
+        if (index > 5) return acc;
+
+        return [
+          ...acc,
+          {
+            // eslint-disable-next-line no-underscore-dangle
+            id: curr._id,
+            description: curr?.content,
+            ...curr,
+          },
+        ];
+      }, []);
+
+      setPaginatedNews(updatedNews);
+    })();
+  }, [page]);
+
   return (
     <Page>
       <Head>
@@ -33,18 +76,31 @@ export default function Noticias(): JSX.Element {
             <h2 className="title translate-highlight">
               Últimas notícias de ABPBE
             </h2>
-            <NoticiaCard />
-            <NoticiaCard />
-            <NoticiaCard />
+            {paginatedNews?.slice(0, 3)?.map((item) => {
+              return <NoticiaCard {...item} />;
+            })}
           </div>
           <div>
             <h2 className="title translate-highlight">Notícais gerais</h2>
-            <Card title="Notícia de abpbe para visualização do novo card" />
-            <Card title="Notícia de abpbe para visualização do novo card" />
-            <Card title="Notícia de abpbe para visualização do novo card" />
+            {paginatedNews?.slice(3, 6)?.map((item) => {
+              return (
+                <Card
+                  {...item}
+                  link={`/noticias/${item?.id}`}
+                  targetBlank={false}
+                />
+              );
+            })}
           </div>
         </NewsContainer>
-        <Pagination />
+        <Pagination
+          totalPages={totalPages}
+          page={page}
+          onChangePage={(newPage) => {
+            setPage(Number(newPage));
+            scrollIntoView("main");
+          }}
+        />
       </ContentContainer>
       <Footer />
     </Page>
@@ -52,11 +108,32 @@ export default function Noticias(): JSX.Element {
 }
 
 export async function getServerSideProps() {
-  const noticias = [];
+  const { data } = await api.get("/news", {
+    params: {
+      data: {
+        orderBy: "creationDate",
+      },
+    },
+  });
+
+  const news = data?.reduce((acc, curr, index) => {
+    if (index > 5) return acc;
+
+    return [
+      ...acc,
+      {
+        // eslint-disable-next-line no-underscore-dangle
+        id: curr._id,
+        description: curr?.content,
+        ...curr,
+      },
+    ];
+  }, []);
 
   return {
     props: {
-      noticias,
+      news,
+      totalPages: Math.round(data?.length / 6),
     },
   };
 }

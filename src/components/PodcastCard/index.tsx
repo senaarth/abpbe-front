@@ -1,5 +1,7 @@
 import React from "react";
 
+import { api } from "../../services/api";
+
 import { PodcastContainer, BannerContainer, TextContainer } from "./styles";
 
 import imgPlay from "../../assets/icon-play.png";
@@ -9,12 +11,23 @@ interface PodcastProps {
   banner: string;
   title: string;
   owner: string;
+  id: string;
 }
 
-export function PodcastCard({ link, banner, title, owner }: PodcastProps) {
+export function PodcastCard({ link, banner, title, owner, id }: PodcastProps) {
+  async function updateViews() {
+    try {
+      await api.put(`/podcasts/increment/${id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <PodcastContainer
-      onClick={() => {
+      onClick={async () => {
+        await updateViews();
+
         if (link) window.open(link);
       }}
     >

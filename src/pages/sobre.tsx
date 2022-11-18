@@ -7,11 +7,15 @@ import { PageBanner } from "../components/PageBanner";
 import { Footer } from "../components/Footer";
 import { PageCall } from "../components/PageCall";
 
+import { api } from "../services/api";
+
 import { Page, ContentContainer, PeopleContainer } from "../styles/Sobre";
 
 type Person = {
+  id: string;
   name: string;
-  picture: string;
+  photo: string;
+  socialMedia: string;
 };
 
 interface SobreProps {
@@ -53,21 +57,27 @@ export default function Sobre({ people }: SobreProps): JSX.Element {
         </h2>
         <PeopleContainer>
           {people?.map((item) => {
-            // return <img src={item.picture} alt={`Associado(a) ${item.picture}`} />
+            // return <img src={item.photo} alt={`Associado(a) ${item.photo}`} />
             return (
-              <div className="image-wrapper">
+              <a
+                href={item?.socialMedia}
+                target="_blank"
+                rel="noreferrer"
+                className="image-wrapper"
+                key={item?.id}
+              >
                 <Image
                   layout="fill"
                   alt={`Foto do(a) associado(a) ${item.name}`}
                   placeholder="blur"
                   blurDataURL="/images/card_placeholder.png"
                   src={
-                    !!item.picture && item.picture !== ""
-                      ? item?.picture
+                    !!item.photo && item.photo !== ""
+                      ? item?.photo
                       : "/images/card_placeholder.png"
                   }
                 />
-              </div>
+              </a>
             );
           })}
         </PeopleContainer>
@@ -84,30 +94,21 @@ export default function Sobre({ people }: SobreProps): JSX.Element {
 }
 
 export async function getServerSideProps() {
+  const { data } = await api.get("/associates");
+
+  const people = data?.reduce((acc, curr) => {
+    return [
+      ...acc,
+      {
+        _id: curr?.id,
+        ...curr,
+      },
+    ];
+  }, []);
+
   return {
     props: {
-      people: [
-        {
-          name: "Arthur Sena",
-          picture: "/images/bg_laptop.png",
-        },
-        {
-          name: "Arthur Sena 1",
-          picture: "/images/bg_laptop.png",
-        },
-        {
-          name: "Arthur Sena 2",
-          picture: "/images/bg_laptop.png",
-        },
-        {
-          name: "Arthur Sena 3",
-          picture: "/images/bg_laptop.png",
-        },
-        {
-          name: "Arthur Sena 4",
-          picture: "/images/bg_laptop.png",
-        },
-      ],
+      people: people || null,
     },
   };
 }

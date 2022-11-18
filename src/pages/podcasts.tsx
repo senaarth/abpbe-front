@@ -8,12 +8,16 @@ import { Select } from "../components/Select";
 import { Page, ContentContainer, CardsContainer } from "../styles/Podcasts";
 import { PodcastCard } from "../components/PodcastCard";
 
+import { api } from "../services/api";
+
 type PodcastType = {
-  uid: string;
+  id: string;
   link: string;
   title: string;
   owner: string;
   image: string;
+  views: number;
+  updateDate: string;
 };
 
 interface PodcastProps {
@@ -21,22 +25,45 @@ interface PodcastProps {
 }
 
 export default function Podcast({ podcasts }: PodcastProps): JSX.Element {
-  const [orderBy, setOrderBy] = React.useState("RECENT");
+  const [sort, setSort] = React.useState("creationDate");
   const options = [
     {
       label: "Recente",
-      value: "RECENT",
+      value: "creationDate",
     },
     {
       label: "Popular",
-      value: "POPULAR",
+      value: "views",
     },
   ];
+  const [sortedPodcasts, setSortedPodcasts] = React.useState(podcasts);
 
   const handleChange = (e) => {
     const object = options.find((option) => option.value === e.target.value);
-    setOrderBy(object.value);
+    setSort(object.value);
   };
+
+  React.useEffect(() => {
+    // eslint-disable-next-line func-names
+    (async function () {
+      const { data } = await api.get("/podcasts", {
+        params: { sort },
+      });
+
+      const updatedPodcasts = data?.reduce((acc, curr) => {
+        return [
+          ...acc,
+          {
+            // eslint-disable-next-line no-underscore-dangle
+            id: curr?._id,
+            ...curr,
+          },
+        ];
+      }, []);
+
+      setSortedPodcasts(updatedPodcasts);
+    })();
+  }, [sort]);
 
   return (
     <Page>
@@ -54,19 +81,20 @@ export default function Podcast({ podcasts }: PodcastProps): JSX.Element {
           <Select
             options={options}
             onChange={handleChange}
-            value={orderBy}
+            value={sort}
             text="Podcasts ordernados por: "
           />
         </div>
         <CardsContainer>
-          {podcasts?.map((podcast) => {
+          {sortedPodcasts?.map((podcast) => {
             return (
               <PodcastCard
                 link={podcast.link}
-                banner={podcast.image}
+                banner={podcast.image || "/images/bg_podcast_example.png"}
                 title={podcast.title}
-                owner={podcast.owner}
-                key={podcast.link}
+                owner="ABPBE"
+                key={podcast?.id}
+                id={podcast?.id}
               />
             );
           })}
@@ -118,64 +146,20 @@ export default function Podcast({ podcasts }: PodcastProps): JSX.Element {
 }
 
 export async function getServerSideProps() {
-  const podcasts = [
-    {
-      id: "1",
-      title: "Por que PBE?",
-      link: "https://anchor.fm/podcastpandora/episodes/78---O-que-esperar-do-1--congresso-da-ABPBE--com-Jan-Leonardi-e1ior2k",
-      owner: "ABPBE",
-      image: "/images/bg_podcast_example.png",
-    },
-    {
-      id: "2",
-      title: "PBE no congresso de Psicologia.",
-      link: "https://anchor.fm/podcastpandora/episodes/78---O-que-esperar-do-1--congresso-da-ABPBE--com-Jan-Leonardi-e1ior2k",
-      owner: "ABPBE",
-      image: "/images/bg_podcast_example.png",
-    },
-    {
-      id: "3",
-      title: "Em breve",
-      link: "https://anchor.fm/podcastpandora/episodes/78---O-que-esperar-do-1--congresso-da-ABPBE--com-Jan-Leonardi-e1ior2k",
-      owner: "ABPBE",
-      image: "/images/bg_podcast_default.png",
-    },
-    {
-      id: "4",
-      title: "Podcast #93",
-      link: "https://anchor.fm/podcastpandora/episodes/78---O-que-esperar-do-1--congresso-da-ABPBE--com-Jan-Leonardi-e1ior2k",
-      owner: "ABPBE",
-      image: "/images/bg_podcast_default.png",
-    },
-    {
-      id: "5",
-      title: "Podcast #93",
-      link: "https://anchor.fm/podcastpandora/episodes/78---O-que-esperar-do-1--congresso-da-ABPBE--com-Jan-Leonardi-e1ior2k",
-      owner: "ABPBE",
-      image: "/images/bg_podcast_default.png",
-    },
-    {
-      id: "6",
-      title: "Podcast #93",
-      link: "https://anchor.fm/podcastpandora/episodes/78---O-que-esperar-do-1--congresso-da-ABPBE--com-Jan-Leonardi-e1ior2k",
-      owner: "ABPBE",
-      image: "/images/bg_podcast_default.png",
-    },
-    {
-      id: "7",
-      title: "Podcast #93",
-      link: "https://anchor.fm/podcastpandora/episodes/78---O-que-esperar-do-1--congresso-da-ABPBE--com-Jan-Leonardi-e1ior2k",
-      owner: "ABPBE",
-      image: "/images/bg_podcast_default.png",
-    },
-    {
-      id: "8",
-      title: "Podcast #93",
-      link: "https://anchor.fm/podcastpandora/episodes/78---O-que-esperar-do-1--congresso-da-ABPBE--com-Jan-Leonardi-e1ior2k",
-      owner: "ABPBE",
-      image: "/images/bg_podcast_default.png",
-    },
-  ];
+  const { data } = await api.get("/podcasts", {
+    params: { sort: "creationDate" },
+  });
+
+  const podcasts = data?.reduce((acc, curr) => {
+    return [
+      ...acc,
+      {
+        // eslint-disable-next-line no-underscore-dangle
+        id: curr?._id,
+        ...curr,
+      },
+    ];
+  }, []);
 
   return {
     props: {
