@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import req from "superagent";
 
 import { PageBanner } from "../components/PageBanner";
 import { Button } from "../components/Button";
@@ -8,7 +9,7 @@ import { Card } from "../components/Card";
 import { PageCall } from "../components/PageCall";
 import { Footer } from "../components/Footer";
 
-import { api } from "../services/api";
+import { PageData } from "../@types/pageData";
 
 import {
   Page,
@@ -27,9 +28,10 @@ type News = {
 
 interface HomeProps {
   news: News[];
+  pageData: PageData;
 }
 
-export default function Home({ news }: HomeProps): JSX.Element {
+export default function Home({ news, pageData }: HomeProps): JSX.Element {
   const router = useRouter();
 
   return (
@@ -39,8 +41,14 @@ export default function Home({ news }: HomeProps): JSX.Element {
       </Head>
       <PageBanner
         img=""
-        title="Associação Brasileira de Psicologia Baseada em Evidências"
-        subtitle="Ciência e Responsabilidade Social"
+        title={
+          pageData?.bannerTitle ||
+          "Associação Brasileira de Psicologia Baseada em Evidências"
+        }
+        subtitle={
+          pageData?.bannerSubtitle || "Ciência e Responsabilidade Social"
+        }
+        tag={pageData?.tag || null}
         socialMedia
         scrollDownCall
       />
@@ -100,26 +108,33 @@ export default function Home({ news }: HomeProps): JSX.Element {
           />
         </NewsContainer>
       </ContentContainer>
-      <PageCall
-        playfairFont
-        title="Nos ajude a aproximar a Psicologia do fazer científico."
-      />
+      {pageData?.pageCall && (
+        <PageCall
+          playfairFont
+          title={
+            pageData?.pageCall ||
+            "Nos ajude a aproximar a Psicologia do fazer científico."
+          }
+          subtitle={
+            pageData?.pageCallSubtitle ||
+            "Nos ajude a aproximar a Psicologia do fazer científico."
+          }
+        />
+      )}
       <Footer />
     </Page>
   );
 }
 
 export async function getServerSideProps() {
-  const { data } = await api.get("/news", {
-    params: {
-      data: {
-        limit: 3,
-        orderBy: "creationDate",
-      },
-    },
-  });
+  const { body: pageData } = await req.get(
+    `${process.env.NEXT_PUBLIC_API}/pages/home`
+  );
+  const { body: newsData } = await req
+    .get(`${process.env.NEXT_PUBLIC_API}/news`)
+    .send({ limit: 3 });
 
-  const news = data?.reduce((acc, curr, index) => {
+  const news = newsData?.reduce((acc, curr, index) => {
     if (index > 2) return acc;
 
     return [
@@ -135,6 +150,7 @@ export async function getServerSideProps() {
   return {
     props: {
       news,
+      pageData,
     },
   };
 }
