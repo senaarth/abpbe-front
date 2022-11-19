@@ -1,14 +1,21 @@
 import React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import req from "superagent";
 
 import { PageBanner } from "../components/PageBanner";
 import { Footer } from "../components/Footer";
-
-import { ContentContainer, Page } from "../styles/Parceiros";
 import { PageCall } from "../components/PageCall";
 
-export default function Parceiros(): JSX.Element {
+import { PageData } from "../@types/pageData";
+
+import { ContentContainer, Page } from "../styles/Parceiros";
+
+interface ParceirosProps {
+  pageData: PageData;
+}
+
+export default function Parceiros({ pageData }: ParceirosProps): JSX.Element {
   const router = useRouter();
 
   return (
@@ -18,37 +25,47 @@ export default function Parceiros(): JSX.Element {
       </Head>
       <PageBanner
         img="/images/bg_parceiros.png"
-        title="Parceiros"
-        subtitle="Aqui você encontrará textos sobre os mais diversos temas relevantes para a Psicologia Baseada em Evidências, desde discussões clássicas até as últimas novidades da ciência."
+        title={pageData?.bannerTitle || "Parceiros"}
+        subtitle={
+          pageData?.bannerSubtitle ||
+          "Aqui você encontrará textos sobre os mais diversos temas relevantes para a Psicologia Baseada em Evidências, desde discussões clássicas até as últimas novidades da ciência."
+        }
         whiteSubtitle
         isTitleHighlighted
-        tag="Novidades"
+        tag={pageData?.tag || "Novidades"}
       />
       <ContentContainer>
         <h1 className="playfair title translate-highlight">
-          Parceiros da ABPBE
+          {pageData?.pageTitle || "Parceiros da ABPBE"}
         </h1>
         <p>
-          A ABPBE busca formar alianças estratégicas com organizações nacionais
-          e internacionais. Através delas, almejamos um crescimento
-          institucional mútuo com o objetivo de incentivar a promoção e adoção
-          da Psicologia Baseada em Evidências. Em nossas alianças podemos fazer
-          acordos de divulgação, financiamento, produção de pesquisa, confecção
-          de artigos e livros, realização de eventos, simpósios e cursos,
-          concessão de direitos autorais e de imagem, etc.
-          <br />
-          <br />
-          Como possíveis organizações parceiras incluímos associações, grupos de
-          estudo e de pesquisa, movimentos estudantis, cursos de graduação e
-          pós-graduação, portais de divulgação e afins.
-          <br />
-          <br />
-          Se você é representante de alguma organização e deseja integrar o
-          nosso quadro, entre em contato conosco. A única condição de caráter
-          inegociável para formação de uma aliança é que a organização em
-          questão esteja alinhada com os ideais da Psicologia Baseada em
-          Evidências, concordando com os nossos objetivos enquanto Associação
-          previstos no estatuto.
+          {pageData?.pageDescription ? (
+            pageData?.pageDescription
+          ) : (
+            <>
+              A ABPBE busca formar alianças estratégicas com organizações
+              nacionais e internacionais. Através delas, almejamos um
+              crescimento institucional mútuo com o objetivo de incentivar a
+              promoção e adoção da Psicologia Baseada em Evidências. Em nossas
+              alianças podemos fazer acordos de divulgação, financiamento,
+              produção de pesquisa, confecção de artigos e livros, realização de
+              eventos, simpósios e cursos, concessão de direitos autorais e de
+              imagem, etc.
+              <br />
+              <br />
+              Como possíveis organizações parceiras incluímos associações,
+              grupos de estudo e de pesquisa, movimentos estudantis, cursos de
+              graduação e pós-graduação, portais de divulgação e afins.
+              <br />
+              <br />
+              Se você é representante de alguma organização e deseja integrar o
+              nosso quadro, entre em contato conosco. A única condição de
+              caráter inegociável para formação de uma aliança é que a
+              organização em questão esteja alinhada com os ideais da Psicologia
+              Baseada em Evidências, concordando com os nossos objetivos
+              enquanto Associação previstos no estatuto.
+            </>
+          )}
         </p>
         <div>
           <img
@@ -78,12 +95,28 @@ export default function Parceiros(): JSX.Element {
         </div>
       </ContentContainer>
       <PageCall
-        title="Gostaria de se tornar um(a) parceiro(a)? "
-        subtitle="Se increva clicando no botão abaixo"
+        title={
+          pageData?.pageCall || "Gostaria de se tornar um(a) parceiro(a)? "
+        }
+        subtitle={
+          pageData?.pageCallSubtitle || "Se increva clicando no botão abaixo"
+        }
         btnTxt="QUERO ME INSCREVER"
-        onClick={() => router.push("inscricao")}
+        onClick={() => router.push("associar")}
       />
       <Footer />
     </Page>
   );
+}
+
+export async function getServerSideProps() {
+  const { body: pageData } = await req.get(
+    `${process.env.NEXT_PUBLIC_API}/pages/parceiros`
+  );
+
+  return {
+    props: {
+      pageData,
+    },
+  };
 }
