@@ -238,6 +238,17 @@ export function MobileHeader() {
                   onClick={() => {
                     setMenu(false);
                     setSobre(false);
+                    router.push("/parceiros");
+                  }}
+                >
+                  <strong>Sobre a associação</strong>
+                  <p>Conheça nossos parceiros</p>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMenu(false);
+                    setSobre(false);
                     router.push("/faq");
                   }}
                 >

@@ -127,6 +127,11 @@ export function DesktopHeader({
                   route: "/manifesto",
                 },
                 {
+                  title: "Sobre a associação",
+                  subtitle: "Conheça nossos parceiros",
+                  route: "/parceiros",
+                },
+                {
                   title: "Perguntas frequentes",
                   subtitle: "Encontre os principais artigos de PBE.",
                   route: "/faq",

@@ -1,13 +1,40 @@
 import React from "react";
 import Head from "next/head";
+import req from "superagent";
 
 import { PageBanner } from "../components/PageBanner";
+import { PageCall } from "../components/PageCall";
 import { Footer } from "../components/Footer";
 // import { Button } from "../components/Button";
 
-import { ContentContainer, Page, Content } from "../styles/Associar";
+import { PageData } from "../@types/pageData";
 
-export default function Associar(): JSX.Element {
+import {
+  ContentContainer,
+  Page,
+  Content,
+  BenefitsContainer,
+  BenefitsCard,
+} from "../styles/Associar";
+
+interface AssociarProps {
+  pageData: PageData;
+  benefits: string[];
+}
+
+export default function Associar({
+  pageData,
+  benefits,
+}: AssociarProps): JSX.Element {
+  const colors = [
+    "#E1EFFECC",
+    "#D5E6F6CC",
+    "#D5F0F6CC",
+    "#E1EFFECC",
+    "#D5F0F6CC",
+    "#EBF7FECC",
+  ];
+
   return (
     <Page>
       <Head>
@@ -15,15 +42,18 @@ export default function Associar(): JSX.Element {
       </Head>
       <PageBanner
         img="/images/bg_estatuto.png"
-        title="Quero me associar"
-        subtitle="Aqui você encontrará textos sobre os mais diversos temas relevantes para a Psicologia Baseada em Evidências, desde discussões clássicas até as últimas novidades da ciência."
+        title={pageData?.bannerTitle || "Quero me associar"}
+        subtitle={
+          pageData?.bannerSubtitle ||
+          "Aqui você encontrará textos sobre os mais diversos temas relevantes para a Psicologia Baseada em Evidências, desde discussões clássicas até as últimas novidades da ciência."
+        }
         whiteSubtitle
         isTitleHighlighted
-        tag="Novidades"
+        tag={pageData?.tag || "Novidades"}
       />
       <ContentContainer>
         <h1 className="playfair title translate-highlight">
-          Quero me associar
+          {pageData?.pageTitle || "Quero me associar"}
         </h1>
         <Content>
           <h1 className="playfair">
@@ -34,11 +64,22 @@ export default function Associar(): JSX.Element {
           </h1>
           <div className="d-flex">
             <div>
-              <img
-                src="images/card_placeholder.png"
-                alt="Fundo de exemplo"
-                style={{ margin: "0 !important", padding: "0 !important" }}
-              />
+              <h3>Benefícios dos Filiados</h3>
+              <BenefitsContainer>
+                {benefits?.map((item) => {
+                  return (
+                    <BenefitsCard
+                      key={item}
+                      style={{
+                        backgroundColor:
+                          colors[Math.floor(Math.random() * colors.length)],
+                      }}
+                    >
+                      {item}
+                    </BenefitsCard>
+                  );
+                })}
+              </BenefitsContainer>
             </div>
             <iframe
               title="eb-widget-associar"
@@ -63,7 +104,46 @@ export default function Associar(): JSX.Element {
           </div>
         </Content>
       </ContentContainer>
+      {pageData?.pageCall && (
+        <PageCall
+          playfairFont
+          title={
+            pageData?.pageCall ||
+            "Nos ajude a aproximar a Psicologia do fazer científico."
+          }
+        />
+      )}
       <Footer />
     </Page>
   );
+}
+
+export async function getServerSideProps() {
+  const { body: pageData } = await req.get(
+    `${process.env.NEXT_PUBLIC_API}/pages/associar`
+  );
+  const { body: benefitsData } = await req.get(
+    `${process.env.NEXT_PUBLIC_API}/benefits`
+  );
+
+  const benefits = benefitsData?.reduce((acc, curr) => {
+    return [...acc, curr?.name];
+  }, []);
+
+  return {
+    props: {
+      benefits: [
+        ...benefits,
+        "Descontos em cursos de parceiros;",
+        "Descontos em eventos da ABPBE;",
+        "Acesso à plataforma Glue Up e rede social interna e exclusiva da ABPBE…",
+        "Participação em reuniões períodicas da ABPBE;",
+        "Descontos em materiais oficiais da ABPBE;",
+        "Possibilidade de cadastro na lista pública de filiados da ABPBE;",
+        "Recebimento de carteirinha oficial da ABPBE (versão virtual e física);",
+        "Colaboração para o desenvolvimento da ABPBE por meio de votação em assembleia, envio de sugestões e feedback.",
+      ],
+      pageData,
+    },
+  };
 }

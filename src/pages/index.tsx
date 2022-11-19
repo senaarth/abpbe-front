@@ -80,7 +80,7 @@ export default function Home({ news, pageData }: HomeProps): JSX.Element {
               type="button"
               variant="primary"
               text="SEJA UM ASSOCIADO"
-              onClick={() => router.push("/faca-parte")}
+              onClick={() => router.push("/associar")}
             />
           </ButtonsContainer>
         </About>

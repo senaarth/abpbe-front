@@ -9,7 +9,20 @@ export const Page = styled.div`
   justify-content: flex-start;
 
   h3 {
-    max-width: unset;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.75rem;
+
+    background: -webkit-linear-gradient(
+      92.48deg,
+      #88c9d0 3.44%,
+      #2e638c 41.54%,
+      #2e638c 86.36%,
+      rgba(26, 53, 71, 0.8) 111.01%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 `;
 
@@ -138,5 +151,29 @@ export const ContentContainer = styled.main`
     align-items: center;
 
     margin-top: 2rem;
+  }
+`;
+
+export const BenefitsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+`;
+
+export const BenefitsCard = styled.p`
+  width: 100%;
+  padding: 0.75rem;
+
+  text-align: center;
+  border-radius: 8px;
+  font-size: 1.25rem;
+  color: #284e85;
+  font-weight: bold;
+
+  @media (max-width: 768px) {
+    font-size: 0.875rem;
   }
 `;

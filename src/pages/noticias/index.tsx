@@ -1,14 +1,16 @@
 import React from "react";
 import Head from "next/head";
+import req from "superagent";
 
 import { PageBanner } from "../../components/PageBanner";
+import { PageCall } from "../../components/PageCall";
 import { Footer } from "../../components/Footer";
 import { NoticiaCard } from "../../components/NoticiaCard";
 import { Card } from "../../components/Card";
 import { Pagination } from "../../components/Pagination";
 
-import { api } from "../../services/api";
 import { scrollIntoView } from "../../utils/scrollIntoView";
+import { PageData } from "../../@types/pageData";
 
 import { Page, ContentContainer, NewsContainer } from "../../styles/Noticias";
 
@@ -23,27 +25,25 @@ type News = {
 interface NoticiasProps {
   news: News[];
   totalPages: number;
+  pageData: PageData;
 }
 
 export default function Noticias({
   news,
   totalPages,
+  pageData,
 }: NoticiasProps): JSX.Element {
   const [page, setPage] = React.useState(1);
   const [paginatedNews, setPaginatedNews] = React.useState(news);
 
   React.useEffect(() => {
-    if (page === 1) return;
-
     // eslint-disable-next-line func-names
     (async function () {
-      const { data } = await api.get("/news", {
-        params: { skip: (page - 1) * 6, limit: 6 },
-      });
+      const { body } = await req
+        .get(`${process.env.NEXT_PUBLIC_API}/news`)
+        .send({ limit: 6 });
 
-      const updatedNews = data?.reduce((acc, curr, index) => {
-        if (index > 5) return acc;
-
+      const updatedNews = body?.reduce((acc, curr) => {
         return [
           ...acc,
           {
@@ -66,15 +66,18 @@ export default function Noticias({
       </Head>
       <PageBanner
         img="/images/bg_leafs.png"
-        title="Notícias da ABPBE"
-        subtitle="Aqui você encontrará textos sobre os mais diversos temas relevantes para a Psicologia Baseada em Evidências, desde discussões clássicas até as últimas novidades da ciência."
-        tag="Novidades"
+        title={pageData?.bannerTitle || "Notícias da ABPBE"}
+        subtitle={
+          pageData?.bannerSubtitle ||
+          "Aqui você encontrará textos sobre os mais diversos temas relevantes para a Psicologia Baseada em Evidências, desde discussões clássicas até as últimas novidades da ciência."
+        }
+        tag={pageData?.tag || "Novidades"}
       />
       <ContentContainer>
         <NewsContainer>
           <div>
             <h2 className="title translate-highlight">
-              Últimas notícias de ABPBE
+              {pageData?.pageTitle || "Últimas notícias de PBE"}
             </h2>
             {paginatedNews?.slice(0, 3)?.map((item) => {
               return <NoticiaCard {...item} />;
@@ -101,6 +104,15 @@ export default function Noticias({
             scrollIntoView("main");
           }}
         />
+        {pageData?.pageCall && (
+          <PageCall
+            playfairFont
+            title={
+              pageData?.pageCall ||
+              "Nos ajude a aproximar a Psicologia do fazer científico."
+            }
+          />
+        )}
       </ContentContainer>
       <Footer />
     </Page>
@@ -108,15 +120,14 @@ export default function Noticias({
 }
 
 export async function getServerSideProps() {
-  const { data } = await api.get("/news", {
-    params: {
-      data: {
-        orderBy: "creationDate",
-      },
-    },
-  });
+  const { body: pageData } = await req.get(
+    `${process.env.NEXT_PUBLIC_API}/pages/noticias`
+  );
+  const { body: newsData } = await req.get(
+    `${process.env.NEXT_PUBLIC_API}/news`
+  );
 
-  const news = data?.reduce((acc, curr, index) => {
+  const news = newsData?.reduce((acc, curr, index) => {
     if (index > 5) return acc;
 
     return [
@@ -132,8 +143,9 @@ export async function getServerSideProps() {
 
   return {
     props: {
+      pageData,
       news,
-      totalPages: Math.round(data?.length / 6),
+      totalPages: Math.round(newsData?.length / 6),
     },
   };
 }
