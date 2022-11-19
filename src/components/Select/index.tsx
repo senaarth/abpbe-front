@@ -28,7 +28,11 @@ export function Select({
       {!!text && <span>{text}</span>}
       <select name="Select" id="" onChange={(e) => onChange(e)} value={value}>
         {options.map((option) => {
-          return <option value={option.value}>{option.label}</option>;
+          return (
+            <option key={option?.value} value={option.value}>
+              {option.label}
+            </option>
+          );
         })}
       </select>
     </Container>

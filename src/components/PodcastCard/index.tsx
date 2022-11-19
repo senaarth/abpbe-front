@@ -1,6 +1,5 @@
 import React from "react";
-
-import { api } from "../../services/api";
+import req from "superagent";
 
 import { PodcastContainer, BannerContainer, TextContainer } from "./styles";
 
@@ -17,7 +16,7 @@ interface PodcastProps {
 export function PodcastCard({ link, banner, title, owner, id }: PodcastProps) {
   async function updateViews() {
     try {
-      await api.put(`/podcasts/increment/${id}`);
+      await req.put(`${process.env.NEXT_PUBLIC_API}/podcasts/increment/${id}`);
     } catch (err) {
       console.log(err);
     }

@@ -130,9 +130,7 @@ export async function getServerSideProps() {
     .get(`${process.env.NEXT_PUBLIC_API}/news`)
     .send({ limit: 3 });
 
-  const news = newsData?.reduce((acc, curr, index) => {
-    if (index > 2) return acc;
-
+  const news = newsData?.reduce((acc, curr) => {
     return [
       ...acc,
       {

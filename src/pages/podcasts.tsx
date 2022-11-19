@@ -1,14 +1,16 @@
 import React from "react";
 import Head from "next/head";
+import req from "superagent";
 
 import { PageBanner } from "../components/PageBanner";
+import { PageCall } from "../components/PageCall";
 import { Footer } from "../components/Footer";
-import { Select } from "../components/Select";
+// import { Select } from "../components/Select";
+
+import { PageData } from "../@types/pageData";
 
 import { Page, ContentContainer, CardsContainer } from "../styles/Podcasts";
 import { PodcastCard } from "../components/PodcastCard";
-
-import { api } from "../services/api";
 
 type PodcastType = {
   id: string;
@@ -22,48 +24,38 @@ type PodcastType = {
 
 interface PodcastProps {
   podcasts: PodcastType[];
+  pageData: PageData;
 }
 
-export default function Podcast({ podcasts }: PodcastProps): JSX.Element {
-  const [sort, setSort] = React.useState("creationDate");
-  const options = [
-    {
-      label: "Recente",
-      value: "creationDate",
-    },
-    {
-      label: "Popular",
-      value: "views",
-    },
-  ];
-  const [sortedPodcasts, setSortedPodcasts] = React.useState(podcasts);
+export default function Podcast({
+  podcasts,
+  pageData,
+}: PodcastProps): JSX.Element {
+  // const [sort, setSort] = React.useState("creationDate");
+  // const options = [
+  //   {
+  //     label: "Recente",
+  //     value: "creationDate",
+  //   },
+  //   {
+  //     label: "Popular",
+  //     value: "views",
+  //   },
+  // ];
+  const [sortedPodcasts] = React.useState(podcasts);
 
-  const handleChange = (e) => {
-    const object = options.find((option) => option.value === e.target.value);
-    setSort(object.value);
-  };
+  // async function updatePodcasts(updatedSort: string) {
+  //   const { body } = await req
+  //     .get(`${process.env.NEXT_PUBLIC_API}/podcasts`)
+  //     .send({ sort: updatedSort });
 
-  React.useEffect(() => {
-    // eslint-disable-next-line func-names
-    (async function () {
-      const { data } = await api.get("/podcasts", {
-        params: { sort },
-      });
+  //   setSortedPodcasts(body);
+  // }
 
-      const updatedPodcasts = data?.reduce((acc, curr) => {
-        return [
-          ...acc,
-          {
-            // eslint-disable-next-line no-underscore-dangle
-            id: curr?._id,
-            ...curr,
-          },
-        ];
-      }, []);
-
-      setSortedPodcasts(updatedPodcasts);
-    })();
-  }, [sort]);
+  // const handleChange = (e) => {
+  //   setSort(e.target.value);
+  //   updatePodcasts(e.target.value);
+  // };
 
   return (
     <Page>
@@ -72,18 +64,22 @@ export default function Podcast({ podcasts }: PodcastProps): JSX.Element {
       </Head>
       <PageBanner
         img="/images/bg_laptop.png"
-        title="Podcasts"
-        subtitle="Nosso podcast pretende oferecer a você de maneira descomplicada e descontraída um contato constante com os temas mais interessantes e atuais dentro da Psicologia Baseada em Evidências no Brasil. Para isso, quinzenalmente convidamos para um bate papo profissionais, pesquisadores e figuras importantes para o nosso movimento a fim de colocarmos o debate em dia. Confira nossos episódios abaixo, ou acompanhe a ABPBE no Spotify:"
+        title={pageData?.bannerTitle || "Podcasts"}
+        subtitle={
+          pageData?.bannerSubtitle ||
+          "Nosso podcast pretende oferecer a você de maneira descomplicada e descontraída um contato constante com os temas mais interessantes e atuais dentro da Psicologia Baseada em Evidências no Brasil. Para isso, quinzenalmente convidamos para um bate papo profissionais, pesquisadores e figuras importantes para o nosso movimento a fim de colocarmos o debate em dia. Confira nossos episódios abaixo, ou acompanhe a ABPBE no Spotify:"
+        }
+        tag={pageData?.tag || null}
       />
       <ContentContainer>
         <div className="d-flex">
           <h1 className="playfair title translate-highlight">Podcasts</h1>
-          <Select
+          {/* <Select
             options={options}
             onChange={handleChange}
             value={sort}
             text="Podcasts ordernados por: "
-          />
+          /> */}
         </div>
         <CardsContainer>
           {sortedPodcasts?.map((podcast) => {
@@ -140,17 +136,29 @@ export default function Podcast({ podcasts }: PodcastProps): JSX.Element {
           </div>
         </RelatedContainer> */}
       </ContentContainer>
+      {pageData?.pageCall && (
+        <PageCall
+          playfairFont
+          title={
+            pageData?.pageCall ||
+            "Nos ajude a aproximar a Psicologia do fazer científico."
+          }
+        />
+      )}
       <Footer />
     </Page>
   );
 }
 
 export async function getServerSideProps() {
-  const { data } = await api.get("/podcasts", {
-    params: { sort: "creationDate" },
-  });
+  const { body: pageData } = await req.get(
+    `${process.env.NEXT_PUBLIC_API}/pages/podcasts`
+  );
+  const { body } = await req
+    .get(`${process.env.NEXT_PUBLIC_API}/podcasts`)
+    .send({ sort: "creationDate" });
 
-  const podcasts = data?.reduce((acc, curr) => {
+  const podcasts = body?.reduce((acc, curr) => {
     return [
       ...acc,
       {
@@ -164,6 +172,7 @@ export async function getServerSideProps() {
   return {
     props: {
       podcasts,
+      pageData,
     },
   };
 }
