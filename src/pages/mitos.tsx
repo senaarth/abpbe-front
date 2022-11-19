@@ -1,8 +1,12 @@
 import React from "react";
 import Head from "next/head";
+import req from "superagent";
 
 import { Footer } from "../components/Footer";
 import { PageBanner } from "../components/PageBanner";
+import { PageCall } from "../components/PageCall";
+
+import { PageData } from "../@types/pageData";
 
 import {
   ContentContainer,
@@ -10,7 +14,6 @@ import {
   MithsContainer,
   MithCard,
 } from "../styles/Mitos";
-import { api } from "../services/api";
 
 type Mito = {
   id: string;
@@ -21,9 +24,10 @@ type Mito = {
 
 interface MitosProps {
   mitos: Mito[];
+  pageData: PageData;
 }
 
-export default function Mitos({ mitos }: MitosProps): JSX.Element {
+export default function Mitos({ mitos, pageData }: MitosProps): JSX.Element {
   return (
     <Page>
       <Head>
@@ -31,17 +35,20 @@ export default function Mitos({ mitos }: MitosProps): JSX.Element {
       </Head>
       <PageBanner
         img="/images/bg_library_1.png"
-        title="Mitos e verdades sobre PBE"
-        subtitle="Aqui você encontrará textos sobre os mais diversos temas relevantes para a Psicologia Baseada em Evidências, desde discussões clássicas até as últimas novidades da ciência."
-        tag="Texto"
+        title={pageData?.bannerTitle || "Mitos e verdades sobre PBE"}
+        subtitle={
+          pageData?.bannerSubtitle ||
+          "Aqui você encontrará textos sobre os mais diversos temas relevantes para a Psicologia Baseada em Evidências, desde discussões clássicas até as últimas novidades da ciência."
+        }
+        tag={pageData?.tag || "Texto"}
       />
       <ContentContainer>
-        <h1 className="title">Mitos e verdades sobre PBE</h1>
+        <h1 className="title">
+          {pageData?.pageTitle || "Mitos e verdades sobre PBE"}
+        </h1>
         <p>
-          Please refer to the facts and myths below that address questions that
-          RSU 24 is receiving regarding its Proficiency-Based Education system,
-          as well as other facts and myths that are being brought up around the
-          country.
+          {pageData?.pageDescription ||
+            "Please refer to the facts and myths below that address questions that RSU 24 is receiving regarding its Proficiency-Based Education system, as well as other facts and myths that are being brought up around the country."}
         </p>
         <MithsContainer>
           {mitos?.map((item) => {
@@ -71,15 +78,29 @@ export default function Mitos({ mitos }: MitosProps): JSX.Element {
           })}
         </MithsContainer>
       </ContentContainer>
+      {pageData?.pageCall && (
+        <PageCall
+          playfairFont
+          title={
+            pageData?.pageCall ||
+            "Nos ajude a aproximar a Psicologia do fazer científico."
+          }
+        />
+      )}
       <Footer />
     </Page>
   );
 }
 
 export async function getServerSideProps() {
-  const { data } = await api.get("/mythsandfacts");
+  const { body: pageData } = await req.get(
+    `${process.env.NEXT_PUBLIC_API}/pages/mitos`
+  );
+  const { body } = await req.get(
+    `${process.env.NEXT_PUBLIC_API}/mythsandfacts`
+  );
 
-  const mitos = data?.reduce((acc, curr) => {
+  const mitos = body?.reduce((acc, curr) => {
     return [
       ...acc,
       {
@@ -93,6 +114,7 @@ export async function getServerSideProps() {
   return {
     props: {
       mitos,
+      pageData,
     },
   };
 }

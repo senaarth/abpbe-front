@@ -115,10 +115,6 @@ export default function Home({ news, pageData }: HomeProps): JSX.Element {
             pageData?.pageCall ||
             "Nos ajude a aproximar a Psicologia do fazer científico."
           }
-          subtitle={
-            pageData?.pageCallSubtitle ||
-            "Nos ajude a aproximar a Psicologia do fazer científico."
-          }
         />
       )}
       <Footer />
