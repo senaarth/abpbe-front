@@ -28,6 +28,7 @@ export const Content = styled.div`
     font-weight: 700;
     padding-bottom: 0.9rem;
     min-width: 300px;
+
     &--selected {
       color: ${({ theme }) => theme.default};
       border-bottom: 2px solid ${({ theme }) => theme.default};
@@ -36,6 +37,10 @@ export const Content = styled.div`
         content: "";
         display: none;
       }
+    }
+
+    &--disabled {
+      cursor: not-allowed !important;
     }
   }
 `;

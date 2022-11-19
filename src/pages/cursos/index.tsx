@@ -1,12 +1,14 @@
 import React from "react";
 import Head from "next/head";
+import req from "superagent";
 
 import { PageBanner } from "../../components/PageBanner";
 import { Card } from "../../components/Card";
 import { Footer } from "../../components/Footer";
 import { Tabs } from "../../components/Tabs";
+import { PageCall } from "../../components/PageCall";
 
-import { api } from "../../services/api";
+import { PageData } from "../../@types/pageData";
 
 import {
   Page,
@@ -19,30 +21,39 @@ type Courses = {
   id: string;
   name: string;
   image: string;
+  level: "INTRODUTÓRIO" | "INTERMEDIÁRIO" | "AVANÇADO";
 };
 
 interface CursosProps {
   courses: Courses[];
+  pageData: PageData;
 }
 
-export default function Cursos({ courses }: CursosProps): JSX.Element {
+export default function Cursos({
+  courses,
+  pageData,
+}: CursosProps): JSX.Element {
   // eslint-disable-next-line no-unused-vars
-  const [activeCategory, setActiveCategory] = React.useState("BASIC"); // vai ser usado na requisição p/ api
+  const [activeCategory, setActiveCategory] = React.useState("INTRODUTÓRIO");
+  const filteredCourses = React.useMemo(
+    () => courses?.filter((item) => item?.level === activeCategory),
+    [activeCategory]
+  );
   const tabs = [
     {
       label: "Introdutório",
-      key: "BASIC",
-      disabled: false,
+      key: "INTRODUTÓRIO",
+      disabled: !courses?.some((item) => item.level === "INTRODUTÓRIO"),
     },
     {
       label: "Intermediário (em breve)",
-      key: "INTERMEDIATE",
-      disabled: true,
+      key: "INTERMEDIÁRIO",
+      disabled: !courses?.some((item) => item.level === "INTERMEDIÁRIO"),
     },
     {
       label: "Avançado (em breve)",
-      key: "ADVANCED",
-      disabled: true,
+      key: "AVANÇADO",
+      disabled: !courses?.some((item) => item.level === "AVANÇADO"),
     },
   ];
 
@@ -57,8 +68,13 @@ export default function Cursos({ courses }: CursosProps): JSX.Element {
       </Head>
       <PageBanner
         img=""
-        title="Associação Brasileira de Psicologia Baseada em Evidências"
-        subtitle="Ciência e Responsabilidade Social"
+        title={
+          pageData?.bannerTitle ||
+          "Associação Brasileira de Psicologia Baseada em Evidências"
+        }
+        subtitle={
+          pageData?.bannerSubtitle || "Ciência e Responsabilidade Social"
+        }
         scrollDownCall
       />
       <ContentContainer>
@@ -66,7 +82,7 @@ export default function Cursos({ courses }: CursosProps): JSX.Element {
           <h2 className="title translate-highlight">Nossos cursos</h2>
           <Tabs tabs={tabs} onChange={handleChange} />
           <CoursesList>
-            {courses?.map((item) => {
+            {filteredCourses?.map((item) => {
               return (
                 <Card
                   key={item.id}
@@ -80,15 +96,27 @@ export default function Cursos({ courses }: CursosProps): JSX.Element {
           </CoursesList>
         </CoursesContainer>
       </ContentContainer>
+      {pageData?.pageCall && (
+        <PageCall
+          playfairFont
+          title={
+            pageData?.pageCall ||
+            "Nos ajude a aproximar a Psicologia do fazer científico."
+          }
+          subtitle={pageData?.pageCallSubtitle || null}
+        />
+      )}
       <Footer />
     </Page>
   );
 }
 
 export async function getServerSideProps() {
-  const { data } = await api.get("/courses");
+  const { body: coursesData } = await req.get(
+    `${process.env.NEXT_PUBLIC_API}/courses`
+  );
 
-  const courses = data?.reduce((acc, curr) => {
+  const courses = coursesData?.reduce((acc, curr) => {
     return [
       ...acc,
       {

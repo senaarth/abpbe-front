@@ -12,14 +12,14 @@ type TabType = {
 interface TabsProps {
   tabs: TabType[];
   // eslint-disable-next-line no-unused-vars
-  onChange: (e) => void;
+  onChange: (value) => void;
 }
 
 export const Tabs = ({ tabs, onChange }: TabsProps) => {
   return (
     <Content>
-      <TabGroup>
-        <TabList onSelect={onChange}>
+      <TabGroup onSelect={(value) => onChange(value)}>
+        <TabList>
           {tabs.map((tab) => {
             return (
               <Tab key={tab.key} disabled={tab.disabled}>
