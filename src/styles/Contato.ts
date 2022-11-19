@@ -129,9 +129,10 @@ export const ContactInfo = styled.div`
       color: rgba(255, 255, 255, 0.7);
     }
 
-    b {
+    a {
       font-size: 0.875rem;
       color: #eee;
+      text-decoration: none;
     }
   }
 
@@ -145,7 +146,7 @@ export const ContactInfo = styled.div`
         font-size: 1rem;
       }
 
-      b {
+      a {
         font-size: 1.25rem;
       }
     }

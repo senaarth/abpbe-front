@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "next/head";
+import req from "superagent";
 
 import { ContactForm } from "../components/ContactForm";
 import { Footer } from "../components/Footer";
@@ -12,7 +13,18 @@ import {
   ContactInfo,
 } from "../styles/Contato";
 
-export default function Contato(): JSX.Element {
+type SocialMedia = {
+  email: string;
+  phone: string;
+  instagram: string;
+  whatsapp: string;
+};
+
+interface ContatoProps {
+  socialMedia: SocialMedia;
+}
+
+export default function Contato({ socialMedia }: ContatoProps): JSX.Element {
   return (
     <Page>
       <Head>
@@ -27,28 +39,38 @@ export default function Contato(): JSX.Element {
               <img src="/images/icon_mail.svg" alt="Icone de email" />
               <div>
                 <p>E-mail</p>
-                <b>contato@abpbe.com.br</b>
+                <a href={`mailto:${socialMedia?.email}`}>
+                  {socialMedia?.email}
+                </a>
               </div>
             </ContactInfo>
             <ContactInfo>
               <img src="/images/icon_phone.svg" alt="Icone de telefone" />
               <div>
                 <p>Telefone</p>
-                <b>(11) 9999-9999</b>
+                <a href={`tel:${socialMedia?.phone}`}>{socialMedia?.phone}</a>
               </div>
             </ContactInfo>
             <ContactInfo>
               <img src="/images/icon_instagram.svg" alt="Icone do instagram" />
               <div>
                 <p>Instagram </p>
-                <b>@nickdoinsta</b>
+                <a
+                  href={`https://instagram.com/${socialMedia?.instagram}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {`@${socialMedia?.instagram}`}
+                </a>
               </div>
             </ContactInfo>
             <ContactInfo>
               <img src="/images/icon_wpp.svg" alt="Icone do whatsapp" />
               <div>
                 <p>WhatsApp </p>
-                <b>(11) 9999-9999</b>
+                <a href={`tel:${socialMedia?.whatsapp}`}>
+                  {socialMedia?.whatsapp}
+                </a>
               </div>
             </ContactInfo>
           </ContactInfoContainer>
@@ -58,4 +80,16 @@ export default function Contato(): JSX.Element {
       <Footer />
     </Page>
   );
+}
+
+export async function getServerSideProps() {
+  const { body: socialMedia } = await req.get(
+    `${process.env.NEXT_PUBLIC_API}/socialmedia`
+  );
+
+  return {
+    props: {
+      socialMedia,
+    },
+  };
 }
