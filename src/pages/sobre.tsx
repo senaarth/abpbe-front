@@ -2,12 +2,13 @@ import React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import req from "superagent";
 
 import { PageBanner } from "../components/PageBanner";
 import { Footer } from "../components/Footer";
 import { PageCall } from "../components/PageCall";
 
-import { api } from "../services/api";
+import { PageData } from "../@types/pageData";
 
 import { Page, ContentContainer, PeopleContainer } from "../styles/Sobre";
 
@@ -20,9 +21,10 @@ type Person = {
 
 interface SobreProps {
   people: Person[];
+  pageData: PageData;
 }
 
-export default function Sobre({ people }: SobreProps): JSX.Element {
+export default function Sobre({ people, pageData }: SobreProps): JSX.Element {
   const router = useRouter();
 
   return (
@@ -32,25 +34,35 @@ export default function Sobre({ people }: SobreProps): JSX.Element {
       </Head>
       <PageBanner
         img="/images/bg_quemsomos.png"
-        title="Quem somos"
-        subtitle="Breve histórico da primeira associação brasileira de psicologia baseada em evidêcncias."
-        tag="Sobre nós"
+        title={pageData?.bannerTitle || "Quem somos"}
+        subtitle={
+          pageData?.bannerSubtitle ||
+          "Breve histórico da primeira associação brasileira de psicologia baseada em evidêcncias."
+        }
+        tag={pageData?.tag || "Sobre nós"}
       />
       <ContentContainer>
-        <h2 className="playfair title translate-highlight">Quem somos</h2>
+        <h2 className="playfair title translate-highlight">
+          {pageData?.pageTitle || "Quem somos"}
+        </h2>
         <p>
-          A Associação Brasileira de Psicologia Baseada em Evidências (ABPBE) é
-          uma organização sem fins lucrativos, fundada em 31 de janeiro de 2022
-          por estudantes, pesquisadores e profissionais insatisfeitos com o
-          cenário atual da Psicologia no Brasil, especialmente no que concerne à
-          formação científica deficitária e ao uso de práticas sem fundamentação
-          empírica predominantes na área.
-          <br />
-          <br />A ABPBE surgiu como um espaço para facilitar, disseminar e
-          incentivar a adoção de teorias e práticas psicológicas baseadas em
-          evidências, bem como o combate às pseudociências, fraudes científicas,
-          pesquisas antiéticas, desinformações na Psicologia e mais. Tem como
-          fundadores os seguintes membros:
+          {pageData?.pageDescription || (
+            <>
+              A Associação Brasileira de Psicologia Baseada em Evidências
+              (ABPBE) é uma organização sem fins lucrativos, fundada em 31 de
+              janeiro de 2022 por estudantes, pesquisadores e profissionais
+              insatisfeitos com o cenário atual da Psicologia no Brasil,
+              especialmente no que concerne à formação científica deficitária e
+              ao uso de práticas sem fundamentação empírica predominantes na
+              área.
+              <br />
+              <br />A ABPBE surgiu como um espaço para facilitar, disseminar e
+              incentivar a adoção de teorias e práticas psicológicas baseadas em
+              evidências, bem como o combate às pseudociências, fraudes
+              científicas, pesquisas antiéticas, desinformações na Psicologia e
+              mais. Tem como fundadores os seguintes membros:
+            </>
+          )}
         </p>
         <h2 className="playfair title translate-highlight">
           Associados da ABPBE
@@ -83,10 +95,15 @@ export default function Sobre({ people }: SobreProps): JSX.Element {
         </PeopleContainer>
       </ContentContainer>
       <PageCall
-        title="Gostaria de se tornar um membro associado da ABPBE também?"
-        subtitle="Se increva clicando no botão abaixo"
+        title={
+          pageData?.pageCall ||
+          "Gostaria de se tornar um membro associado da ABPBE também?"
+        }
+        subtitle={
+          pageData?.pageCallSubtitle || "Se increva clicando no botão abaixo"
+        }
         btnTxt="SEJA UM ASSOCIADO (A)"
-        onClick={() => router.push("inscricao")}
+        onClick={() => router.push("associar")}
       />
       <Footer />
     </Page>
@@ -94,13 +111,19 @@ export default function Sobre({ people }: SobreProps): JSX.Element {
 }
 
 export async function getServerSideProps() {
-  const { data } = await api.get("/associates");
+  const { body: pageData } = await req.get(
+    `${process.env.NEXT_PUBLIC_API}/pages/sobre`
+  );
+  const { body: peopleData } = await req.get(
+    `${process.env.NEXT_PUBLIC_API}/associates`
+  );
 
-  const people = data?.reduce((acc, curr) => {
+  const people = peopleData?.reduce((acc, curr) => {
     return [
       ...acc,
       {
-        _id: curr?.id,
+        // eslint-disable-next-line no-underscore-dangle
+        id: curr._id,
         ...curr,
       },
     ];
@@ -109,6 +132,7 @@ export async function getServerSideProps() {
   return {
     props: {
       people: people || null,
+      pageData,
     },
   };
 }
