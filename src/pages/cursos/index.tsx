@@ -112,6 +112,9 @@ export default function Cursos({
 }
 
 export async function getServerSideProps() {
+  const { body: pageData } = await req.get(
+    `${process.env.NEXT_PUBLIC_API}/pages/cursos`
+  );
   const { body: coursesData } = await req.get(
     `${process.env.NEXT_PUBLIC_API}/courses`
   );
@@ -130,6 +133,7 @@ export async function getServerSideProps() {
   return {
     props: {
       courses,
+      pageData,
     },
   };
 }
