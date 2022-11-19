@@ -1,4 +1,6 @@
 import React from "react";
+import req from "superagent";
+
 import { Button } from "../../../components/Button";
 import { CursoAccordion } from "../../../components/CursoAccordion";
 
@@ -152,17 +154,12 @@ export default function Curso({ curso }: CursoProps): JSX.Element {
 }
 
 export const getStaticPaths = async () => {
-  // const client = createClient({ previewData });
-  // const news = await client.getAllByType("new");
+  const { body } = await req.get(`${process.env.NEXT_PUBLIC_API}/courses`);
 
-  const paths = ["/cursos/curso-teste"];
-  // news?.map((project) => {
-  //     return {
-  //         params: {
-  //             slug: project?.uid,
-  //         },
-  //     };
-  // });
+  const paths = body?.reduce((acc, curr) => {
+    // eslint-disable-next-line no-underscore-dangle
+    return [...acc, `/cursos/${curr?._id}`];
+  }, []);
 
   return {
     paths: paths || [],
@@ -171,58 +168,26 @@ export const getStaticPaths = async () => {
 };
 
 export async function getStaticProps({ params }) {
-  // const client = createClient({ previewData });
+  const { body } = await req.get(
+    `${process.env.NEXT_PUBLIC_API}/courses/${params?.uid}`
+  );
 
-  const { uid } = params;
   const curso = {
-    uid,
-    title: "Curso de Teste",
-    edition: "1º Edição",
-    description: `
-      Um dos objetivos da nossa iniciativa é levar conhecimento aos profissionais e estudantes de Psicologia interessados em aprimorar suas habilidades, se manter atualizados e desenvolver uma atuação cada vez mais centrada em compromissos éticos sólidos. 
-      Para isso, a ABPBE montou uma equipe dedicada a identificar importantes lacunas na formação dos psicólogos brasileiros e estruturar cursos destinados a tornar você um representante da Psicologia mais preparado, seja na academia ou seja nos seus espaços de trabalho. Além disso, aqui também anunciaremos outras formações de instituições aliadas na nossa busca por mudanças fundamentais na Psicologia nacional.
-    `,
-    area: "Psicologia",
-    duration: "30 horas",
-    chapters: "3",
-    level: "Básico",
-    language: "Português",
-    tags: ["ao vivo", "30h de conteúdo", "Gravação por 2 meses"],
-    benefits: ["Benefício 1", "Benefício 2", "Benefício 3"],
-    ticketsBatches: [
-      {
-        name: "1º Lote",
-        limitDate: "2022/12/12",
-      },
-
-      {
-        name: "2º Lote",
-        limitDate: "2022/12/12",
-      },
-    ],
-    symplaLink: "https://sympla.com/",
-    faq: [
-      {
-        summary: "Item 1",
-        details:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
-      },
-      {
-        summary: "Item 2",
-        details:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
-      },
-      {
-        summary: "Item 3",
-        details:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
-      },
-      {
-        summary: "Item 4",
-        details:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
-      },
-    ],
+    ...body,
+    // eslint-disable-next-line no-underscore-dangle
+    uid: body?._id,
+    title: body?.name,
+    edition: `${body?.edition || 1}º Edição`,
+    symplaLink: body?.symplaLink || "https://sympla.com/",
+    faq: body?.questions?.reduce((acc, curr) => {
+      return [
+        ...acc,
+        {
+          summary: curr?.question,
+          details: curr?.reply,
+        },
+      ];
+    }, []),
   };
 
   return {
