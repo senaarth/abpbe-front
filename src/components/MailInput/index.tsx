@@ -7,7 +7,8 @@ import { Wrapper } from "./styles";
 
 interface MailInputProps {
   placeholder: string;
-  onSubmit: () => void;
+  // eslint-disable-next-line no-unused-vars
+  onSubmit: (value: string) => void;
   btnText: string;
   onSuccess: string;
   onError: string;
@@ -28,16 +29,18 @@ export function MailInput({
 
   async function handleSubmit() {
     try {
-      onSubmit();
+      await onSubmit(value);
       toast(onSuccess, {
         type: "success",
         className: "success",
       });
+      setValue("");
     } catch {
       toast(onError, {
         type: "error",
         className: "error",
       });
+      setValue("");
     }
   }
 

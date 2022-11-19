@@ -14,7 +14,8 @@ interface PageCallProps {
   btnTxt?: string;
   onClick?: () => void;
   inputPlaceholder?: string;
-  onSubmit?: () => void;
+  // eslint-disable-next-line no-unused-vars
+  onSubmit?: (email: string) => void;
   onSuccess?: string;
   onError?: string;
   inputSubmitTxt?: string;
@@ -57,7 +58,7 @@ export function PageCall({
       {!!inputPlaceholder && (
         <MailInput
           placeholder={inputPlaceholder}
-          onSubmit={() => onSubmit()}
+          onSubmit={(email) => onSubmit(email)}
           onSuccess={onSuccess}
           onError={onError}
           btnText={inputSubmitTxt}

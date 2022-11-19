@@ -15,7 +15,8 @@ interface PageBannerProps {
   tag?: string;
   scrollDownCall?: boolean;
   inputPlaceholder?: string;
-  onSubmit?: () => void;
+  // eslint-disable-next-line no-unused-vars
+  onSubmit?: (value: string) => void;
   onSuccess?: string;
   onError?: string;
   inputSubmitTxt?: string;
@@ -62,7 +63,7 @@ export function PageBanner({
       {!!inputPlaceholder && (
         <MailInput
           placeholder={inputPlaceholder}
-          onSubmit={() => onSubmit()}
+          onSubmit={(value) => onSubmit(value)}
           onSuccess={onSuccess}
           onError={onError}
           btnText={inputSubmitTxt}
